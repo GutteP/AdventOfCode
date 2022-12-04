@@ -90,6 +90,7 @@
                 case Seperator.Semicolon: return ";";
                 case Seperator.NewLine: return "\r\n";
                 case Seperator.Tab: return "\t";
+                case Seperator.Dash: return "-";
                 default: throw new NotImplementedException();
             }
         }
@@ -102,6 +103,7 @@
         Dot,
         Semicolon,
         NewLine,
-        Tab
+        Tab,
+        Dash
     }
 }
