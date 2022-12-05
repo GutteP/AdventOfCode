@@ -4,6 +4,10 @@ public interface IRunner
 {
     int Run(string path);
 }
+//public interface IRunner<T>
+//{
+//    T Run(string path);
+//}
 public class DayRunner
 {
     public DayRunner(IRunner partOne, IRunner partTwo)
@@ -14,6 +18,31 @@ public class DayRunner
     public IRunner PartOne { get; set; }
     public IRunner PartTwo { get; set; }
 }
+//public class DayRunner<TReturns>
+//{
+//    public DayRunner(IRunner<TReturns> partOne, IRunner<TReturns> partTwo)
+//    {
+//        PartOne = partOne;
+//        PartTwo = partTwo;
+//    }
+//    public IRunner<TReturns> PartOne { get; set; }
+//    public IRunner<TReturns> PartTwo { get; set; }
+//}
+//public class Runner<TTransformed, TReturns> : IRunner<TReturns>
+//{
+//    private readonly Func<string, TTransformed> _tansformer;
+//    private readonly Func<TTransformed, TReturns> _solver;
+
+//    public Runner(Func<string, TTransformed> tansformer, Func<TTransformed, TReturns> solver)
+//    {
+//        _tansformer = tansformer;
+//        _solver = solver;
+//    }
+//    public TReturns Run(string path)
+//    {
+//        return _solver(_tansformer(path));
+//    }
+//}
 public class Runner<TTransformed> : IRunner
 {
     private readonly Func<string, TTransformed> _tansformer;

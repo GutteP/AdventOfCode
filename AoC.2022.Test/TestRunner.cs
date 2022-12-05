@@ -8,4 +8,10 @@ public static class TestRunner
         if (expectedPartOne is not null) runner.PartOne.Run(path).Should().Be(expectedPartOne);
         if (expectedPartTwo is not null) runner.PartTwo.Run(path).Should().Be(expectedPartTwo);
     }
+    //public static void Test(this IAoCDay day, string path, string? expectedPartOne, string? expectedPartTwo)
+    //{
+    //    var runner = day.Runner();
+    //    if (expectedPartOne is not null) runner.PartOne.Run(path).Should().Be(expectedPartOne);
+    //    if (expectedPartTwo is not null) runner.PartTwo.Run(path).Should().Be(expectedPartTwo);
+    //}
 }

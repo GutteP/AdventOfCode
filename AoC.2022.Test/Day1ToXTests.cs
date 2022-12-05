@@ -2,6 +2,7 @@
 using AoC._2022.Day2;
 using AoC._2022.Day3;
 using AoC._2022.Day4;
+using AoC._2022.Day5;
 
 namespace AoC._2022.Test;
 
@@ -39,6 +40,20 @@ public class Day1ToXTests
     public void Day4Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new SectionChecker().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day5/t1.txt", "CMZ", "MCD")]
+    [InlineData("Day5/input.txt", "TLFGBZHCN", "QRQFHFWCL")]
+    public void Day5Test(string path, string? expectedPartOne, string? expectedPartTwo)
+    {
+        var sut = new CrateTracker();
+        string partOne = sut.Track(sut.Transformer(path));
+        Assert.Equal(expectedPartOne, partOne);
+
+        string partTwo = sut.Track9001(sut.Transformer(path));
+        Assert.Equal(expectedPartTwo, partTwo);
+
     }
 
 }
