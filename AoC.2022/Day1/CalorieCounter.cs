@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.Day1;
 
-public class CalorieCounter : IAoCDay
+public class CalorieCounter : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<List<int>, int>(Transformer, Solver, 1), new Runner<List<int>, int>(Transformer, Solver, 3));
+        return new DayRunner<int>(new Runner<List<int>, int, int>(Transformer, Solver, 1), new Runner<List<int>, int, int>(Transformer, Solver, 3));
     }
 
     private List<int> Transformer(string path)

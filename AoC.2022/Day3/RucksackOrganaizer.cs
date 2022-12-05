@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.Day3;
 
-public class RucksackOrganaizer : IAoCDay
+public class RucksackOrganaizer : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<List<int[]>>(Transformer, DuplicateFinder), new Runner<List<int[]>>(Transformer, BadgeIdentifier));
+        return new DayRunner<int>(new Runner<List<int[]>, int>(Transformer, DuplicateFinder), new Runner<List<int[]>, int>(Transformer, BadgeIdentifier));
     }
     private List<int[]> Transformer(string path)
     {

@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.Day2;
 
-public class RPSScoreCalculator : IAoCDay
+public class RPSScoreCalculator : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<List<List<string>>>(Transformer, ScoreCounter), new Runner<List<List<string>>>(Transformer, StrategyScoreCounter));
+        return new DayRunner<int>(new Runner<List<List<string>>, int>(Transformer, ScoreCounter), new Runner<List<List<string>>, int>(Transformer, StrategyScoreCounter));
     }
 
     private List<List<string>> Transformer(string path)

@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.Day4;
 
-public class SectionChecker : IAoCDay
+public class SectionChecker : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<List<(List<int> a, List<int> b)>>(Transformer, TotalOverlap), new Runner<List<(List<int> a, List<int> b)>>(Transformer, AnyOverlap));
+        return new DayRunner<int>(new Runner<List<(List<int> a, List<int> b)>, int>(Transformer, TotalOverlap), new Runner<List<(List<int> a, List<int> b)>, int>(Transformer, AnyOverlap));
     }
 
     private List<(List<int> a, List<int> b)> Transformer(string path)

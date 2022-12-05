@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.TestDay2;
 
-public class SubmarinePilot : IAoCDay
+public class SubmarinePilot : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<List<List<string>>>(Transformer, Plotter), new Runner<List<List<string>>>(Transformer, AimPlotter));
+        return new DayRunner<int>(new Runner<List<List<string>>, int>(Transformer, Plotter), new Runner<List<List<string>>, int>(Transformer, AimPlotter));
     }
 
     private List<List<string>> Transformer(string path)

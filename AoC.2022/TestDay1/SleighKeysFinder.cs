@@ -1,10 +1,10 @@
 ﻿namespace AoC._2022.TestDay1;
 
-public class SleighKeysFinder : IAoCDay
+public class SleighKeysFinder : IAoCDay<int>
 {
-    public DayRunner Runner()
+    public DayRunner<int> Runner()
     {
-        return new DayRunner(new Runner<int[], int>(Transformer, NumberOfLarger, 1), new Runner<int[], int>(Transformer, NumberOfLarger, 3));
+        return new DayRunner<int>(new Runner<int[], int, int>(Transformer, NumberOfLarger, 1), new Runner<int[], int, int>(Transformer, NumberOfLarger, 3));
     }
 
     private int[] Transformer(string path)

@@ -1,81 +1,64 @@
 ﻿namespace AoC._2022.Day5;
 
-public class CrateTracker/* : IAoCDay*/
+public class CrateTracker : IAoCDay<string>
 {
-    //public DayRunner Runner()
-    //{
-    //    return new DayRunner<string>(new Runner<(List<Stack<char>> stacks, List<(int move, int from, int to)> instructions), string>(Transformer, Track), null)
-    //}
-
-    public (List<Stack<char>> stacks, List<(int move, int from, int to)> instructions) Transformer(string path)
+    public DayRunner<string> Runner()
     {
-        var input = InputReader.ReadLines(path);
+        return new DayRunner<string>(
+            new Runner<(List<Stack<char>> stacks, List<(int move, int from, int to)> instructions), string>(Transformer, CrateTracker9000),
+            new Runner<(List<Stack<char>> stacks, List<(int move, int from, int to)> instructions), string>(Transformer, CrateTracker9001)
+            );
+    }
+
+    private (List<Stack<char>> stacks, List<(int move, int fromIndex, int toIndex)> instructions) Transformer(string path)
+    {
+        var input = InputReader.ReadLines(path).ToArray();
 
         List<(int move, int from, int to)> instructions = new();
         List<Stack<char>> stacks = new();
-        List<string> tempStacks = new();
 
-        bool stacksDone = false;
-        foreach (string row in input)
-        {
-            if (string.IsNullOrEmpty(row))
-            {
-                stacksDone = true;
-                continue;
-            }
-            if (stacksDone)
-            {
-                List<string> instuction = row.SplitOn(Seperator.Space);
-                instructions.Add((int.Parse(instuction[1]), int.Parse(instuction[3]), int.Parse(instuction[5])));
-            }
-            else
-            {
-                tempStacks.Add(row);
-            }
-        }
-        tempStacks.Reverse();
-        for (int i = 0; i < tempStacks[0].SplitOn(Seperator.Space).Trim().RemoveEmpty().Count; i++)
-        {
-            stacks.Add(new Stack<char>());
-        }
+        int breakIndex = input.ToList().FindIndex(string.IsNullOrWhiteSpace);
+        string[] rawStacks = input[..breakIndex];
+        string[] rawInstructions = input[(breakIndex + 1)..];
 
-        tempStacks.RemoveAt(0);
-
-        foreach (string s in tempStacks)
+        for (int i = rawStacks.Length - 2; i >= 0; i--)
         {
-            List<string> content = s.SplitOn(Seperator.Space).Trim('[', ']');
-            int numOfempty = 0;
-            int j = 0;
-            for (int i = 0; i < content.Count; i++)
+            List<string> content = rawStacks[i].SplitOn(Seperator.Space).Trim('[', ']');
+            int stackIndex = 0;
+            for (int j = 0; j < content.Count; j++)
             {
-                if (string.IsNullOrEmpty(content[i]))
+                if (string.IsNullOrEmpty(content[j]))
                 {
-                    numOfempty++;
-                    if (numOfempty == 4)
-                    {
-                        j++;
-                        numOfempty = 0;
-                    }
+                    j += 3;
+                    stackIndex++;
                     continue;
                 }
-                stacks[j].Push(content[i][0]);
-                j++;
+
+                if (stacks.ElementAtOrDefault(stackIndex) is null) stacks.Add(new Stack<char>());
+                stacks[stackIndex].Push(content[j][0]);
+                stackIndex++;
             }
+        }
+
+        foreach (string rawInstruction in rawInstructions)
+        {
+            List<string> instuction = rawInstruction.SplitOn(Seperator.Space);
+            instructions.Add((int.Parse(instuction[1]), int.Parse(instuction[3]) - 1, int.Parse(instuction[5]) - 1));
         }
 
         return (stacks, instructions);
     }
 
-    public string Track((List<Stack<char>> stacks, List<(int move, int from, int to)> instructions) input)
+    private string CrateTracker9000((List<Stack<char>> stacks, List<(int move, int fromIndex, int toIndex)> instructions) input)
     {
-        foreach ((int move, int from, int to) ins in input.instructions)
+        foreach (var instruction in input.instructions)
         {
-            for (int i = 0; i < ins.move; i++)
+            for (int i = 0; i < instruction.move; i++)
             {
-                char temp = input.stacks[ins.from - 1].Pop();
-                input.stacks[ins.to - 1].Push(temp);
+                input.stacks[instruction.toIndex].Push(input.stacks[instruction.fromIndex].Pop());
             }
         }
+
         string result = "";
         foreach (var item in input.stacks)
         {
@@ -84,21 +67,21 @@ public class CrateTracker/* : IAoCDay*/
 
         return result;
     }
-    public string Track9001((List<Stack<char>> stacks, List<(int move, int from, int to)> instructions) input)
+    private string CrateTracker9001((List<Stack<char>> stacks, List<(int move, int fromIndex, int toIndex)> instructions) input)
     {
-        foreach ((int move, int from, int to) ins in input.instructions)
+        foreach (var ins in input.instructions)
         {
             Stack<char> temp = new();
             for (int i = 0; i < ins.move; i++)
             {
-                temp.Push(input.stacks[ins.from - 1].Pop());
-
+                temp.Push(input.stacks[ins.fromIndex].Pop());
             }
             while (temp.Any())
             {
-                input.stacks[ins.to - 1].Push(temp.Pop());
+                input.stacks[ins.toIndex].Push(temp.Pop());
             }
         }
+
         string result = "";
         foreach (var item in input.stacks)
         {

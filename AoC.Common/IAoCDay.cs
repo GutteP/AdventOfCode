@@ -1,8 +1,8 @@
 ﻿namespace AoC.Common;
 
-public interface IAoCDay
+public interface IAoCDay<T>
 {
-    DayRunner Runner();
+    DayRunner<T> Runner();
 }
 
 
