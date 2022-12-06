@@ -3,6 +3,7 @@ using AoC._2022.Day2;
 using AoC._2022.Day3;
 using AoC._2022.Day4;
 using AoC._2022.Day5;
+using AoC._2022.Day6;
 
 namespace AoC._2022.Test;
 
@@ -48,6 +49,18 @@ public class Day1ToXTests
     public void Day5Test(string path, string? expectedPartOne, string? expectedPartTwo)
     {
         new CrateTracker().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day6/t1.txt", 7, 19)]
+    [InlineData("Day6/t2.txt", 5, 23)]
+    [InlineData("Day6/t3.txt", 6, 23)]
+    [InlineData("Day6/t4.txt", 10, 29)]
+    [InlineData("Day6/t5.txt", 11, 26)]
+    [InlineData("Day6/input.txt", 1542, 3153)]
+    public void Day6Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new PacketProcessor().Test(path, expectedPartOne, expectedPartTwo);
     }
 
 }
