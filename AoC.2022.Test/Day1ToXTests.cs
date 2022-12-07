@@ -4,6 +4,7 @@ using AoC._2022.Day3;
 using AoC._2022.Day4;
 using AoC._2022.Day5;
 using AoC._2022.Day6;
+using AoC._2022.Day7;
 
 namespace AoC._2022.Test;
 
@@ -61,6 +62,22 @@ public class Day1ToXTests
     public void Day6Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new PacketProcessor().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day7/t1.txt", 95437, 24933642)]
+    [InlineData("Day7/input.txt", 1334506, 7421137)]
+    public void Day7Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new CommandLineInterpreter().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day8/t1.txt", 1, null)]
+    [InlineData("Day8/input.txt", 1, null)]
+    public void Day8Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        //new CommandLineInterpreter().Test(path, expectedPartOne, expectedPartTwo);
     }
 
 }
