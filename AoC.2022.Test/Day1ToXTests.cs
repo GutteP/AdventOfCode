@@ -5,6 +5,7 @@ using AoC._2022.Day4;
 using AoC._2022.Day5;
 using AoC._2022.Day6;
 using AoC._2022.Day7;
+using AoC._2022.Day8;
 
 namespace AoC._2022.Test;
 
@@ -73,11 +74,11 @@ public class Day1ToXTests
     }
 
     [Theory]
-    [InlineData("Day8/t1.txt", 1, null)]
-    [InlineData("Day8/input.txt", 1, null)]
+    [InlineData("Day8/t1.txt", 21, 8)]
+    [InlineData("Day8/input.txt", 1695, 287040)]
     public void Day8Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
-        //new CommandLineInterpreter().Test(path, expectedPartOne, expectedPartTwo);
+        new TreeHouseEValuator().Test(path, expectedPartOne, expectedPartTwo);
     }
 
 }
