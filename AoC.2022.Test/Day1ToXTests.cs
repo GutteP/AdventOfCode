@@ -6,6 +6,8 @@ using AoC._2022.Day5;
 using AoC._2022.Day6;
 using AoC._2022.Day7;
 using AoC._2022.Day8;
+using AoC._2022.Day9;
+using AoC._2022.DayX;
 
 namespace AoC._2022.Test;
 
@@ -78,7 +80,22 @@ public class Day1ToXTests
     [InlineData("Day8/input.txt", 1695, 287040)]
     public void Day8Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
-        new TreeHouseEValuator().Test(path, expectedPartOne, expectedPartTwo);
+        new GroveEvaluator().Test(path, expectedPartOne, expectedPartTwo);
     }
 
+    [Theory]
+    [InlineData("Day9/t1.txt", 13, 1)]
+    [InlineData("Day9/t2.txt", 88, 36)]
+    [InlineData("Day9/input.txt", 6311, 2482)]
+    public void Day9Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new RopeSimulator().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("DayX/t1.txt", 1, null)]
+    [InlineData("DayX/input.txt", 1, null)]
+    public void DayXTest(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new AoCDay10().Test(path, expectedPartOne, expectedPartTwo);
+    }
 }

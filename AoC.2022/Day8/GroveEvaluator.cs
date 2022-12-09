@@ -1,6 +1,6 @@
 ﻿namespace AoC._2022.Day8;
 
-public class TreeHouseEValuator : IAoCDay<int>
+public class GroveEvaluator : IAoCDay<int>
 {
     public DayRunner<int> Runner()
     {
@@ -9,16 +9,7 @@ public class TreeHouseEValuator : IAoCDay<int>
 
     private int[,] Transformer(string path)
     {
-        var input = InputReader.ReadLines(path);
-        int[,] map = new int[input.Count, input[0].Length];
-        for (int i = 0; i < input.Count; i++)
-        {
-            for (int j = 0; j < input[i].Length; j++)
-            {
-                map[i, j] = (int)char.GetNumericValue(input[i][j]);
-            }
-        }
-        return map;
+        return InputReader.ReadLines(path).ToNumericValue().Map2D();
     }
 
     private int NumberOfVisible(int[,] map)
