@@ -92,10 +92,10 @@ public class Day1ToXTests
         new RopeSimulator().Test(path, expectedPartOne, expectedPartTwo);
     }
     [Theory]
-    [InlineData("DayX/t1.txt", 1, null)]
-    [InlineData("DayX/input.txt", 1, null)]
+    [InlineData("DayX/t1.txt", 13140, null)]
+    [InlineData("DayX/input.txt", 14160, null)] // Part Two: RJERPEFC
     public void DayXTest(string path, int? expectedPartOne, int? expectedPartTwo)
     {
-        new AoCDay10().Test(path, expectedPartOne, expectedPartTwo);
+        new HandheldRepair().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
