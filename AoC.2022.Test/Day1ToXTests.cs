@@ -8,6 +8,8 @@ using AoC._2022.Day7;
 using AoC._2022.Day8;
 using AoC._2022.Day9;
 using AoC._2022.DayX;
+using AoC._2022.DayXI;
+using AoC._2022.DayXII;
 
 namespace AoC._2022.Test;
 
@@ -97,5 +99,21 @@ public class Day1ToXTests
     public void DayXTest(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new HandheldRepair().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    //[Theory]
+    //[InlineData("DayXI/t1.txt", 10605.0, null)] //2713310158.0
+    //[InlineData("DayXI/t1.txt", null, 2713310158.0)] //2713310158.0
+    //[InlineData("DayXI/input.txt", 54054.0, null)]
+    //public void DayXITest(string path, double? expectedPartOne, double? expectedPartTwo)
+    //{
+    //    new MonkeyKeepAway().Test(path, expectedPartOne, expectedPartTwo);
+    //}
+
+    [Theory]
+    [InlineData("DayXII/t1.txt", 31, 29)]
+    [InlineData("DayXII/input.txt", 468, 459)]
+    public void DayXIITest(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new HeightMapPathFinder().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

@@ -37,6 +37,15 @@ public static class Transformer
         }
         return output;
     }
+    public static List<double> ToDouble(this List<string> input)
+    {
+        List<double> output = new();
+        foreach (string str in input)
+        {
+            output.Add(double.Parse(str));
+        }
+        return output;
+    }
     public static List<List<string>> RemoveEmpty(this List<List<string>> input)
     {
         List<List<string>> output = new();
