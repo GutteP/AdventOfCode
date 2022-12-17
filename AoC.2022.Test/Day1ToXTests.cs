@@ -10,6 +10,7 @@ using AoC._2022.Day9;
 using AoC._2022.DayX;
 using AoC._2022.DayXI;
 using AoC._2022.DayXII;
+using AoC._2022.DayXIII;
 
 namespace AoC._2022.Test;
 
@@ -115,5 +116,13 @@ public class Day1ToXTests
     public void DayXIITest(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new HeightMapPathFinder().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("DayXIII/t1.txt", 13, 140)]
+    [InlineData("DayXIII/input.txt", 4734, 21836)]
+    public void DayXIIITest(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new PacketOrderChecker().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
