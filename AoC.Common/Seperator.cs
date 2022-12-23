@@ -8,6 +8,7 @@
         Semicolon,
         NewLine,
         Tab,
-        Dash
+        Dash,
+        Arrow
     }
 }
