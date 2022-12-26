@@ -13,6 +13,7 @@ using AoC._2022.DayXIII;
 using AoC._2022.DayXIV;
 using AoC._2022.DayXV;
 using AoC._2022.DayXVII;
+using AoC._2022.DayXVIII;
 
 namespace AoC._2022.Test;
 
@@ -148,5 +149,13 @@ public class Day1ToXTests
     public void DayXVII_Test(string path, double? expectedPartOne, double? expectedPartTwo)
     {
         new PyroclasticTetris().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("DayXVIII/t1.txt", 64, 58)]
+    [InlineData("DayXVIII/input.txt", 4580, 2610)]
+
+    public void DayXVIII_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new LavaDroplet().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
