@@ -8,11 +8,11 @@ using AoC._2022.Day7;
 using AoC._2022.Day8;
 using AoC._2022.Day9;
 using AoC._2022.DayX;
-using AoC._2022.DayXI;
 using AoC._2022.DayXII;
 using AoC._2022.DayXIII;
 using AoC._2022.DayXIV;
 using AoC._2022.DayXV;
+using AoC._2022.DayXVII;
 
 namespace AoC._2022.Test;
 
@@ -140,5 +140,13 @@ public class Day1ToXTests
     public void DayXV_Test(string path, double? expectedPartOne, double? expectedPartTwo)
     {
         new BeconSensors().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("DayXVII/t1.txt", 3068.0, 1514285714288.0)] // 1514285714288.0
+    [InlineData("DayXVII/input.txt", 3209.0, 1580758017509.0)]
+
+    public void DayXVII_Test(string path, double? expectedPartOne, double? expectedPartTwo)
+    {
+        new PyroclasticTetris().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
