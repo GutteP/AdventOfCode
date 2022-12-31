@@ -1,4 +1,4 @@
-﻿using AoC._2022.DayX;
+﻿using AoC._2022.Day10;
 
 namespace AoC._2022.Display;
 
