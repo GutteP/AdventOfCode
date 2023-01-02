@@ -95,7 +95,12 @@ public class MonkeyGame : IAoCDay<double>
                 values.Add((Math.Abs(clone["root"].A.Value - clone["root"].B.Value), num));
             }
             values = values.OrderBy(x => x.diff).ToList();
-            if (values[1].number < values[0].number)
+            if (values[0].number == 0)
+            {
+                from = values[0].number;
+                to = values[1].number;
+            }
+            else if (values[1].number < values[0].number)
             {
                 from = values[1].number;
                 to = values[2].number;

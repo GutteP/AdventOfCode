@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>AoC._2022.Test</RootNamespace>
+    <RootNamespace>AoC._2015.Test</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AoC.2022\AoC.2022.csproj" />
+    <ProjectReference Include="..\AoC.2015\AoC.2015.csproj" />
     <ProjectReference Include="..\AoC.Common\AoC.Common.csproj" />
   </ItemGroup>
 

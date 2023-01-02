@@ -1,4 +1,6 @@
-﻿namespace AoC._2022.Test;
+﻿using FluentAssertions;
+
+namespace AoC.Common;
 
 public static class TestRunner
 {

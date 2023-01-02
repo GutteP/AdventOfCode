@@ -181,10 +181,8 @@ public class Day1ToXTests
     }
 
     [Theory]
-    [InlineData("Day21/t1.txt", 152D, null)]
-    [InlineData("Day21/t1.txt", null, 301D)]
-    [InlineData("Day21/input.txt", 256997859093114D, null)]
-    [InlineData("Day21/input.txt", null, 3952288690726D)]
+    [InlineData("Day21/t1.txt", 152D, 301D)]
+    [InlineData("Day21/input.txt", 256997859093114D, 3952288690726D)]
 
     public void Day21_Test(string path, double? expectedPartOne, double? expectedPartTwo)
     {
