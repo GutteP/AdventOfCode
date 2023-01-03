@@ -9,7 +9,7 @@
 
         private List<int> Transformer(string path)
         {
-            return InputReader.ReadLines(path).ToInt();
+            return InputReader.ReadLines(path).ToIntList();
         }
 
         private long SimpleDecoder(List<int> numbers)

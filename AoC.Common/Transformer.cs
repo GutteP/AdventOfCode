@@ -24,16 +24,25 @@ public static class Transformer
         List<List<int>> output = new();
         foreach (List<string> list in input)
         {
-            output.Add(list.ToInt());
+            output.Add(list.ToIntList());
         }
         return output;
     }
-    public static List<int> ToInt(this List<string> input)
+    public static List<int> ToIntList(this IEnumerable<string> input)
     {
         List<int> output = new();
         foreach (string str in input)
         {
             output.Add(int.Parse(str));
+        }
+        return output;
+    }
+    public static int[] ToIntArray(this IEnumerable<string> input)
+    {
+        int[] output = new int[input.Count()];
+        for (int i = 0; i < input.Count(); i++)
+        {
+            output[i] = int.Parse(input.ElementAt(i));
         }
         return output;
     }

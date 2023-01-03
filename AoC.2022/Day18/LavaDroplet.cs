@@ -14,7 +14,7 @@
             List<string> input = InputReader.ReadLines(path);
             foreach (string row in input)
             {
-                List<int> coordinates = row.SplitOn(Seperator.Comma).ToInt();
+                List<int> coordinates = row.SplitOn(Seperator.Comma).ToIntList();
                 foreach (var item in coordinates)
                 {
                     if (item > max) max = item;
@@ -27,7 +27,7 @@
             bool[,,] droplet = new bool[range + 2, range + 2, range + 2];
             foreach (string row in input)
             {
-                List<int> coordinates = row.SplitOn(Seperator.Comma).ToInt();
+                List<int> coordinates = row.SplitOn(Seperator.Comma).ToIntList();
                 droplet[coordinates[0] + displace, coordinates[1] + displace, coordinates[2] + displace] = true;
             }
             return droplet;

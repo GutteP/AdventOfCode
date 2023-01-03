@@ -9,7 +9,7 @@ public class SleighKeysFinder : IAoCDay<int>
 
     private int[] Transformer(string path)
     {
-        return InputReader.ReadLines(path).Trim().ToInt().ToArray();
+        return InputReader.ReadLines(path).Trim().ToIntList().ToArray();
     }
 
     private int NumberOfLarger(int[] depths, int window = 1)
