@@ -1,6 +1,7 @@
 using AoC._2015.Day01;
 using AoC._2015.Day02;
 using AoC._2015.Day03;
+using AoC._2015.Day04;
 
 namespace AoC._2015.Test;
 
@@ -32,5 +33,16 @@ public class Day01ToX
     public void Day03_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new PresentDelivering().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("abcdef", 609043, null)]
+    [InlineData("abcdef", 609043, 6742839)]
+    [InlineData("pqrstuv", 1048970, 5714438)]
+    [InlineData("yzbqklnj", 282749, 9962624)]
+
+    public void Day04_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new AdventCoin().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
