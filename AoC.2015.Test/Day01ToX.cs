@@ -1,5 +1,6 @@
 using AoC._2015.Day01;
 using AoC._2015.Day02;
+using AoC._2015.Day03;
 
 namespace AoC._2015.Test;
 
@@ -22,5 +23,14 @@ public class Day01ToX
     public void Day02_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new PresentWrappingOrder().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day03/t1.txt", 4, 3)]
+    [InlineData("Day03/input.txt", 2592, 2360)]
+
+    public void Day03_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new PresentDelivering().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
