@@ -2,6 +2,7 @@ using AoC._2015.Day01;
 using AoC._2015.Day02;
 using AoC._2015.Day03;
 using AoC._2015.Day04;
+using AoC._2015.Day05;
 
 namespace AoC._2015.Test;
 
@@ -36,7 +37,6 @@ public class Day01ToX
     }
 
     [Theory]
-    [InlineData("abcdef", 609043, null)]
     [InlineData("abcdef", 609043, 6742839)]
     [InlineData("pqrstuv", 1048970, 5714438)]
     [InlineData("yzbqklnj", 282749, 9962624)]
@@ -44,5 +44,15 @@ public class Day01ToX
     public void Day04_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new AdventCoin().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("Day05/t1.txt", 2, null)]
+    [InlineData("Day05/t2.txt", null, 2)]
+    [InlineData("Day05/input.txt", 258, 53)]
+
+    public void Day05_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new NaughtyOrNice().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
