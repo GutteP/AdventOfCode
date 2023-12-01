@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>AoC._2022.Test</RootNamespace>
+    <RootNamespace>AoC._2023.Test</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AoC.2022\AoC.2022.csproj" />
+    <ProjectReference Include="..\AoC.2023\AoC.2023.csproj" />
     <ProjectReference Include="..\AoC.Common\AoC.Common.csproj" />
   </ItemGroup>
 
