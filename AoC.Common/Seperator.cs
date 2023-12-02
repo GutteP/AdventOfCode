@@ -9,6 +9,7 @@
         NewLine,
         Tab,
         Dash,
-        Arrow
+        Arrow,
+        Colon
     }
 }

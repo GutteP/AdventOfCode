@@ -119,6 +119,7 @@ public static class Transformer
             case Seperator.Tab: return "\t";
             case Seperator.Dash: return "-";
             case Seperator.Arrow: return " -> ";
+            case Seperator.Colon: return ":";
             default: throw new NotImplementedException();
         }
     }

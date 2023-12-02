@@ -67,3 +67,25 @@ public class Runner<TTransformed, TOptionOne, TOptionTwo, TReturn> : IRunner<TRe
         return _solver(_tansformer(path), _optionOne, _optionTwo);
     }
 }
+public class Runner<TTransformed, TOptionOne, TOptionTwo, TOptionThree, TReturn> : IRunner<TReturn>
+{
+    private readonly Func<string, TTransformed> _tansformer;
+    private readonly Func<TTransformed, TOptionOne, TOptionTwo, TOptionThree, TReturn> _solver;
+    private readonly TOptionOne _optionOne;
+    private readonly TOptionTwo _optionTwo;
+    private readonly TOptionThree _optionThree;
+
+
+    public Runner(Func<string, TTransformed> tansformer, Func<TTransformed, TOptionOne, TOptionTwo, TOptionThree, TReturn> solver, TOptionOne optionOne, TOptionTwo optionTwo, TOptionThree optionThree)
+    {
+        _tansformer = tansformer;
+        _solver = solver;
+        _optionOne = optionOne;
+        _optionTwo = optionTwo;
+        _optionThree = optionThree;
+    }
+    public TReturn Run(string path)
+    {
+        return _solver(_tansformer(path), _optionOne, _optionTwo, _optionThree);
+    }
+}
