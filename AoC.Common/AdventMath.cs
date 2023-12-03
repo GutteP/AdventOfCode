@@ -9,7 +9,7 @@ namespace AoC.Common;
 
 public static class AdventMath
 {
-    public static T Product<T>(this T[] numbers) where T : INumber<T>
+    public static T Product<T>(this IEnumerable<T> numbers) where T : INumber<T>
     {
         T result = T.Zero;
         result++;

@@ -88,7 +88,7 @@ namespace AoC._2022.Day12
         }
     }
 
-    public class HeightMapPosition : Position<int>
+    public record HeightMapPosition : Position<int>
     {
         public HeightMapPosition(int x, int y) : base(x, y) { }
 

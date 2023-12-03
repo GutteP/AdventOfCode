@@ -1,4 +1,6 @@
-﻿namespace AoC.Common.Test;
+﻿using FluentAssertions;
+
+namespace AoC.Common.Test;
 
 public class ToIntTests
 {

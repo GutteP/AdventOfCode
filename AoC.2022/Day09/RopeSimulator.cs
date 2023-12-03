@@ -85,7 +85,7 @@ public class RopeSimulator : IAoCDay<int>
         return visitedAtLeastOnce.Count;
     }
 }
-public class Knot : Position<int>
+public record Knot : Position<int>
 {
     public Knot(int x, int y) : base(x, y) { }
 

@@ -1,5 +1,6 @@
 using AoC._2023._01;
 using AoC._2023._02;
+using AoC._2023._03;
 using AoC.Common;
 
 namespace AoC._2023.Test;
@@ -23,5 +24,14 @@ public class Day1ToXTests
     public void Day02_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new CubeConundrum().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("03/t1.txt", 4361, 467835)]
+    [InlineData("03/input.txt", 528819, 80403602)]
+
+    public void Day03_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new GearRatios().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

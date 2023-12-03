@@ -2,7 +2,7 @@
 
 namespace AoC.Common;
 
-public class Position<T> where T : INumber<T>
+public record Position<T> where T : IBinaryInteger<T>
 {
     public Position(T x, T y)
     {
@@ -12,6 +12,39 @@ public class Position<T> where T : INumber<T>
 
     public T X { get; protected set; }
     public T Y { get; protected set; }
+
+    public List<Position<T>> Neighbors(bool withDiagonals)
+    {
+        List<Position<T>> neighbors = new();
+        neighbors.Add(new(X - T.One, Y));
+        neighbors.Add(new(X + T.One, Y));
+        neighbors.Add(new(X, Y - T.One));
+        neighbors.Add(new(X, Y + T.One));
+        if (withDiagonals)
+        {
+            neighbors.Add(new(X - T.One, Y - T.One));
+            neighbors.Add(new(X + T.One, Y - T.One));
+            neighbors.Add(new(X - T.One, Y + T.One));
+            neighbors.Add(new(X + T.One, Y + T.One));
+        }
+        return neighbors;
+    }
+    public bool InRange(T xLower, T xUpper, T yLower, T yUpper)
+    {
+        if (X < xLower) return false;
+        if (X > xUpper) return false;
+        if (Y < yLower) return false;
+        if (Y > yUpper) return false;
+        return true;
+    }
+    public bool InRange(T upper)
+    {
+        return InRange(T.Zero, upper, T.Zero, upper);
+    }
+    public bool InRange(T xUpper, T yUpper)
+    {
+        return InRange(T.Zero, xUpper, T.Zero, yUpper);
+    }
 
     public void Move(Direction direction, T steps)
     {
@@ -52,5 +85,32 @@ public class Position<T> where T : INumber<T>
     public override string ToString()
     {
         return $"{X},{Y}";
+    }
+}
+
+public class Positions<T> where T : IBinaryInteger<T>
+{
+    private readonly IEnumerable<Position<T>> _positions;
+
+    public Positions(IEnumerable<Position<T>> positions)
+    {
+        _positions = positions ?? throw new ArgumentNullException(nameof(positions));
+    }
+
+    public List<Position<T>> Neighbors(bool withDiagonals)
+    {
+        HashSet<Position<T>> adjacent = new();
+        foreach (var position in _positions)
+        {
+            foreach (var neighbor in position.Neighbors(withDiagonals))
+            {
+                adjacent.Add(neighbor);
+            }
+        }
+        foreach (var p in _positions)
+        {
+            adjacent.Remove(p);
+        }
+        return adjacent.ToList();
     }
 }
