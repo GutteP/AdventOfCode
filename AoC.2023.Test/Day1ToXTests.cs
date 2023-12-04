@@ -1,6 +1,7 @@
 using AoC._2023._01;
 using AoC._2023._02;
 using AoC._2023._03;
+using AoC._2023._04;
 using AoC.Common;
 
 namespace AoC._2023.Test;
@@ -33,5 +34,13 @@ public class Day1ToXTests
     public void Day03_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new GearRatios().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("04/t1.txt", 13, 30)]
+    [InlineData("04/input.txt", 19135, 5704953)]
+
+    public void Day04_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new Scratchcards().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

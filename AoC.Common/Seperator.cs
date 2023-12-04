@@ -10,6 +10,7 @@
         Tab,
         Dash,
         Arrow,
-        Colon
+        Colon,
+        Pipe
     }
 }

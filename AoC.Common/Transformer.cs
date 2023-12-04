@@ -120,6 +120,7 @@ public static class Transformer
             case Seperator.Dash: return "-";
             case Seperator.Arrow: return " -> ";
             case Seperator.Colon: return ":";
+            case Seperator.Pipe: return "|";
             default: throw new NotImplementedException();
         }
     }
