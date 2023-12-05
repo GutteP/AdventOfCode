@@ -31,7 +31,8 @@ public class SeedMapping : IAoCDay<long>
             {
                 //Ranges
                 List<long> numbers = line.SplitOn(Seperator.Space).Select(x => long.Parse(x)).ToList();
-                map.AddRanges(numbers[1], numbers[0], numbers[2]);
+                map.AddRanges(AoCRange.CreateFromLength(numbers[1], numbers[2]), numbers[0]);
+
             }
         }
         if (map != null) maps.Add(map);
@@ -89,26 +90,23 @@ public class SeedMapping : IAoCDay<long>
         {
             Sources = new();
             Destinations = new();
-            Lengths = new();
         }
-        public void AddRanges(long source, long destination, long length)
+        public void AddRanges(AoCRange source, long destination)
         {
             Sources.Add(source);
             Destinations.Add(destination);
-            Lengths.Add(length);
         }
 
-        public List<long> Sources { get; }
+        public List<AoCRange> Sources { get; }
         public List<long> Destinations { get; }
-        public List<long> Lengths { get; set; }
         public List<long> Seeds { get; set; }
         public long Map(long number)
         {
             for (int i = 0; i < Sources.Count; i++)
             {
-                if (number >= Sources[i] && number <= Sources[i] + Lengths[i] - 1)
+                if (Sources[i].In(number))
                 {
-                    long diff = number - Sources[i];
+                    long diff = number - Sources[i].From;
                     return Destinations[i] + diff;
                 }
             }

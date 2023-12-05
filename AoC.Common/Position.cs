@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 
 namespace AoC.Common;
-
 public record Position<T> where T : IBinaryInteger<T>
 {
     public Position(T x, T y)
