@@ -2,6 +2,7 @@ using AoC._2023._01;
 using AoC._2023._02;
 using AoC._2023._03;
 using AoC._2023._04;
+using AoC._2023._05;
 using AoC.Common;
 
 namespace AoC._2023.Test;
@@ -42,5 +43,13 @@ public class Day1ToXTests
     public void Day04_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new Scratchcards().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("05/t1.txt", 35, 46)]
+    [InlineData("05/input.txt", 178159714, 1, Skip = "true")] // 1h körtid typ
+
+    public void Day05_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new SeedMapping().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
