@@ -4,7 +4,9 @@ using AoC._2023._03;
 using AoC._2023._04;
 using AoC._2023._05;
 using AoC._2023._06;
+using AoC._2023._07;
 using AoC.Common;
+using FluentAssertions;
 
 namespace AoC._2023.Test;
 
@@ -60,5 +62,13 @@ public class Day1ToXTests
     public void Day06_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new BoatRacing().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("07/t1.txt", 6440L, null)] //5905L
+    [InlineData("07/input.txt", 253910319L, null)]
+
+    public void Day07_Test(string path, long? expectedPartOne, long? expectedPartTwo)
+    {
+        new CamelCards().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
