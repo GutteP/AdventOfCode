@@ -5,6 +5,7 @@ using AoC._2023._04;
 using AoC._2023._05;
 using AoC._2023._06;
 using AoC._2023._07;
+using AoC._2023._08;
 using AoC.Common;
 using FluentAssertions;
 
@@ -70,5 +71,15 @@ public class Day1ToXTests
     public void Day07_Test(string path, long? expectedPartOne, long? expectedPartTwo)
     {
         new CamelCards().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("08/t1.txt", 2, null)]
+    [InlineData("08/t2.txt", 6, null)]
+    [InlineData("08/t3.txt", null, 6L)]
+    [InlineData("08/input.txt", 17141, 10818234074807L)]
+    public void Day08_Test(string path, int? expectedPartOne, long? expectedPartTwo)
+    {
+        new HauntedWasteland().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
