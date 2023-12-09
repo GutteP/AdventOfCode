@@ -6,6 +6,7 @@ using AoC._2023._05;
 using AoC._2023._06;
 using AoC._2023._07;
 using AoC._2023._08;
+using AoC._2023._09;
 using AoC.Common;
 using FluentAssertions;
 
@@ -81,5 +82,13 @@ public class Day1ToXTests
     public void Day08_Test(string path, int? expectedPartOne, long? expectedPartTwo)
     {
         new HauntedWasteland().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("09/t1.txt", 114, 2)]
+    [InlineData("09/input.txt", 1934898178, 1129)]
+    public void Day09_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new MirageMaintenance().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
