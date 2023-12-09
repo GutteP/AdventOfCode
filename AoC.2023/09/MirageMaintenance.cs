@@ -22,7 +22,7 @@
             List<int> allNext = new();
             foreach (var seq in input)
             {
-                allNext.Add(NextValue(seq));
+                allNext.Add(AoCMath.NextInSequence(seq));
             }
             return allNext.Sum();
         }
@@ -31,43 +31,9 @@
             List<int> allNext = new();
             foreach (var seq in input)
             {
-                allNext.Add(PreviousValue(seq));
+                allNext.Add(AoCMath.PreviousInSequence(seq));
             }
             return allNext.Sum();
-        }
-
-        public int NextValue(List<int> seq)
-        {
-            List<List<int>> work = AddDiff(seq);
-            for (int i = work.Count - 2; i >= 0; i--)
-            {
-                work[i].Add(work[i][work[i].Count - 1] + work[i + 1].Last());
-            }
-            return work[0].Last();
-        }
-        public int PreviousValue(List<int> seq)
-        {
-            List<List<int>> work = AddDiff(seq);
-            for (int i = work.Count - 2; i >= 0; i--)
-            {
-                int prev = work[i][0] - work[i + 1][0];
-                work[i].Insert(0, prev);
-            }
-            return work[0].First();
-        }
-        private List<List<int>> AddDiff(List<int> seq)
-        {
-            List<List<int>> work = new() { seq };
-            while (!work.Last().All(x => x == 0))
-            {
-                List<int> diff = new();
-                for (int i = 0; i < work.Last().Count - 1; i++)
-                {
-                    diff.Add(work.Last()[i + 1] - work.Last()[i]);
-                }
-                work.Add(diff);
-            }
-            return work;
         }
     }
 }

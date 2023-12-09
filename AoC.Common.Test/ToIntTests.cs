@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Collections.Generic;
 
 namespace AoC.Common.Test;
 
@@ -27,5 +28,23 @@ public class ToIntTests
             Assert.Equal(16, item.Count);
         }
 
+    }
+}
+
+public class AoCMathTests
+{
+    [Fact]
+    public void NextInSequence()
+    {
+        var seq = Enumerable.Range(1, 9999999);
+        var next = AoCMath.NextInSequence(seq);
+        next.Should().Be(10000000);
+    }
+    [Fact]
+    public void PreviousInSequence()
+    {
+        var seq = Enumerable.Range(1, 9999999);
+        var next = AoCMath.PreviousInSequence(seq);
+        next.Should().Be(0);
     }
 }
