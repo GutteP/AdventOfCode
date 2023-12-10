@@ -67,8 +67,8 @@ public class Day1ToXTests
         new BoatRacing().Test(path, expectedPartOne, expectedPartTwo);
     }
     [Theory]
-    [InlineData("07/t1.txt", 6440L, null)] //5905L
-    [InlineData("07/input.txt", 253910319L, null)]
+    [InlineData("07/t1.txt", 6440L, 5905L)]
+    [InlineData("07/input.txt", 253910319L, 254083736L)]
 
     public void Day07_Test(string path, long? expectedPartOne, long? expectedPartTwo)
     {

@@ -11,44 +11,58 @@ public class CamelCards : IAoCDay<long>
 {
     public DayRunner<long> Runner()
     {
-        return new DayRunner<long>(new Runner<List<Card>, long>(ReadInput, PartOne), null);
+        return new DayRunner<long>(new Runner<List<CamelCardHand>, long>(ReadInputPartOne, TotalWinnings), new Runner<List<CamelCardHand>, long>(ReadInputPartTwo, TotalWinnings));
     }
 
-    public List<Card> ReadInput(string path)
+    public List<CamelCardHand> ReadInputPartOne(string path)
     {
-        List<Card> cards = new();
+        List<CamelCardHand> cards = new();
         foreach (var stringCard in InputReader.ReadLines(path))
         {
             var sp = stringCard.Trim().SplitOn(Seperator.Space).Select(x => x.Trim()).ToList();
-            cards.Add(new(sp[0], int.Parse(sp[1])));
+            cards.Add(new(sp[0], int.Parse(sp[1]), false));
         }
         cards = cards.Order().ToList();
         return cards;
     }
+    public List<CamelCardHand> ReadInputPartTwo(string path)
+    {
+        List<CamelCardHand> hands = new();
+        foreach (var stringCard in InputReader.ReadLines(path))
+        {
+            var sp = stringCard.Trim().SplitOn(Seperator.Space).Select(x => x.Trim()).ToList();
+            hands.Add(new(sp[0], int.Parse(sp[1]), true));
+        }
+        hands = hands.Order().ToList();
+        return hands;
+    }
 
-    public long PartOne(List<Card> cards)
+    public long TotalWinnings(List<CamelCardHand> hands)
     {
         long sum = 0;
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < hands.Count; i++)
         {
-            sum += cards[i].Value * (i + 1);
+            sum += hands[i].Value * (i + 1);
         }
         return sum;
     }
 
-    public record Card : IComparable<Card>
+    public record CamelCardHand : IComparable<CamelCardHand>
     {
-        public Card(string inputString, int value)
+        public CamelCardHand(string inputString, int value, bool partTwo)
         {
-            if(inputString.Length != 5) throw new ArgumentException();
+            if (inputString.Length != 5) throw new ArgumentException();
+            PartTwo = partTwo;
             Counts = new();
             Cards = inputString.ToList().Select(x => CardValue(x)).ToList();
             for (int i = 0; i < Cards.Count; i++)
             {
+                if (Cards[i] == 1) continue;
                 if (Cards[..i].Contains(Cards[i])) continue;
                 Counts.Add(Cards.Count(x => x == Cards[i]));
             }
             Counts = Counts.OrderByDescending(x => x).ToList();
+            NumberOfJokers = Cards.Count(x => x == 1);
             CardType = TypePoints();
             Value = value;
         }
@@ -56,21 +70,25 @@ public class CamelCards : IAoCDay<long>
         public List<int> Counts { get; set; }
         public int CardType { get; set; }
         public int Value { get; set; }
+        public bool PartTwo { get; }
+        public int NumberOfJokers { get; set; }
 
         private int TypePoints()
         {
-            if (Counts[0] == 5) return 7;
-            if (Counts[0] == 4) return 6;
-            if (Counts[0] == 3 && Counts[1] == 2) return 5;
-            if (Counts[0] == 3) return 4;
+            if (Counts.Count <= 1) return 7;
+            if (Counts[0] + NumberOfJokers >= 5) return 7;
+            if (Counts[0] + NumberOfJokers == 4) return 6;
+            if ((Counts.Count >= 2 && Counts[0] == 3 && Counts[1] == 2) ||
+                (Counts.Count >= 2 && Counts[0] == 2 && Counts[1] == 2 && NumberOfJokers == 1)) return 5;
+            if (Counts[0] + NumberOfJokers == 3) return 4;
             if (Counts[0] == 2 && Counts[1] == 2) return 3;
-            if (Counts[0] == 2) return 2;
-            if (Counts[0] == 1) return 1;
+            if (Counts[0] + NumberOfJokers == 2) return 2;
+            if (Counts[0] + NumberOfJokers == 1) return 1;
             throw new Exception("Hit ska vi inte komma");
         }
 
-        public int CompareTo(Card? other)
-        { 
+        public int CompareTo(CamelCardHand? other)
+        {
             if (other == null) throw new Exception("other null");
 
             if (CardType != other.CardType) return CardType > other.CardType ? 1 : -1;
@@ -90,6 +108,7 @@ public class CamelCards : IAoCDay<long>
             if (card == 'A') return 14;
             if (card == 'K') return 13;
             if (card == 'Q') return 12;
+            if (card == 'J' && PartTwo) return 1;
             if (card == 'J') return 11;
             if (card == 'T') return 10;
             if (card == '9') return 9;
@@ -105,7 +124,7 @@ public class CamelCards : IAoCDay<long>
 
         public override string ToString()
         {
-            return string.Join(',', Cards) + " - " +CardType+ " - " + Value;
+            return string.Join(',', Cards) + " - " + CardType + " - " + Value;
         }
     }
 }
