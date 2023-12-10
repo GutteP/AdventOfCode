@@ -7,6 +7,7 @@ using AoC._2023._06;
 using AoC._2023._07;
 using AoC._2023._08;
 using AoC._2023._09;
+using AoC._2023._10;
 using AoC.Common;
 using FluentAssertions;
 
@@ -90,5 +91,13 @@ public class Day1ToXTests
     public void Day09_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new MirageMaintenance().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("10/t1.txt", 4, 1)]
+    [InlineData("10/t2.txt", 8, 1)]
+    [InlineData("10/input.txt", 6757, 523)]
+    public void Day10_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new PipeMaze().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

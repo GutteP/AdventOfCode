@@ -26,4 +26,16 @@ public static class Mapper
         }
         return map;
     }
+
+    public static Position<int>? FindFirst<T>(this T[,] map, T value)
+    {
+        for (int i = 0; i < map.GetLength(0); i++)
+        {
+            for (int j = 0; j < map.GetLength(1); j++)
+            {
+                if (map[i, j].Equals(value)) return new Position<int>(j, i);
+            }
+        }
+        return default;
+    }
 }

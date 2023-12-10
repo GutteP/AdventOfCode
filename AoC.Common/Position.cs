@@ -9,8 +9,8 @@ public record Position<T> where T : IBinaryInteger<T>
         Y = y;
     }
 
-    public T X { get; protected set; }
-    public T Y { get; protected set; }
+    public T X { get; set; }
+    public T Y { get; set; }
 
     public List<Position<T>> Neighbors(bool withDiagonals)
     {
@@ -45,18 +45,38 @@ public record Position<T> where T : IBinaryInteger<T>
         return InRange(T.Zero, xUpper, T.Zero, yUpper);
     }
 
+    //public void Move(Direction direction, T steps)
+    //{
+    //    switch (direction)
+    //    {
+    //        case Direction.Up:
+    //            Y += steps;
+    //            break;
+    //        case Direction.Right:
+    //            X += steps;
+    //            break;
+    //        case Direction.Down:
+    //            Y -= steps;
+    //            break;
+    //        case Direction.Left:
+    //            X -= steps;
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
     public void Move(Direction direction, T steps)
     {
         switch (direction)
         {
             case Direction.Up:
-                Y += steps;
+                Y -= steps;
                 break;
             case Direction.Right:
                 X += steps;
                 break;
             case Direction.Down:
-                Y -= steps;
+                Y += steps;
                 break;
             case Direction.Left:
                 X -= steps;

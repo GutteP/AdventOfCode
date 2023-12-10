@@ -55,7 +55,7 @@ public class PyroclasticTetris : IAoCDay<double>
                 }
                 n++;
 
-                block.Move(Direction.Down);
+                block.Move(Direction.Up); // Här är något konstigt.. 
                 if (map.Hit(block))
                 {
                     block.Reverse();
