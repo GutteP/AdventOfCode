@@ -8,6 +8,7 @@ using AoC._2023._07;
 using AoC._2023._08;
 using AoC._2023._09;
 using AoC._2023._10;
+using AoC._2023._11;
 using AoC.Common;
 using FluentAssertions;
 
@@ -99,5 +100,12 @@ public class Day1ToXTests
     public void Day10_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new PipeMaze().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("11/t1.txt", 374, 82000210L)]
+    [InlineData("11/input.txt", 9605127, 458191688761L)]
+    public void Day11_Test(string path, int? expectedPartOne, long? expectedPartTwo)
+    {
+        new CosmicExpansion().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
