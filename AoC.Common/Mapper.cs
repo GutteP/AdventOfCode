@@ -38,4 +38,23 @@ public static class Mapper
         }
         return default;
     }
+
+    public static IEnumerable<T> Slice<T>(this T[,] map, int? row, int? column)
+    {
+        if (row != null)
+        {
+            for (var i = 0; i < map.GetLength(0); i++)
+            {
+                yield return map[i, row.Value];
+            }
+        }
+        else if (column != null)
+        {
+            for (var i = 0; i < map.GetLength(1); i++)
+            {
+                yield return map[column.Value, i];
+            }
+        }
+        else throw new Exception("Antingen row eller column");
+    }
 }

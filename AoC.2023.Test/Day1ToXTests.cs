@@ -9,6 +9,8 @@ using AoC._2023._08;
 using AoC._2023._09;
 using AoC._2023._10;
 using AoC._2023._11;
+using AoC._2023._12;
+using AoC._2023._13;
 using AoC.Common;
 using FluentAssertions;
 
@@ -107,5 +109,24 @@ public class Day1ToXTests
     public void Day11_Test(string path, int? expectedPartOne, long? expectedPartTwo)
     {
         new CosmicExpansion().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    [Theory]
+    [InlineData("12/t1.txt", 21, 525152L)]
+    [InlineData("12/t2.txt", 10, 506250L)]
+    [InlineData("12/t3.txt", 2, null)]
+    [InlineData("12/t4.txt", 4, null)]
+    [InlineData("12/t5.txt", 4, null)]
+    //[InlineData("12/input.txt", 7090, 1L)]
+    public void Day12_Test(string path, int? expectedPartOne, long? expectedPartTwo)
+    {
+        new HotSprings().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("13/t1.txt", 405, 400)]
+    [InlineData("13/input.txt", 32723, 34536)]
+    public void Day13_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new PointOfIncidence().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
