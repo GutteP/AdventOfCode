@@ -11,6 +11,7 @@ using AoC._2023._10;
 using AoC._2023._11;
 using AoC._2023._12;
 using AoC._2023._13;
+using AoC._2023._14;
 using AoC.Common;
 using FluentAssertions;
 
@@ -128,5 +129,12 @@ public class Day1ToXTests
     public void Day13_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new PointOfIncidence().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("14/t1.txt", 136, 64)]
+    [InlineData("14/input.txt", 109424, 102509)]
+    public void Day14_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new ParabolicReflectorDish().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

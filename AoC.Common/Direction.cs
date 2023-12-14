@@ -9,6 +9,16 @@ public enum Direction
 
 public static class DirectionCreator
 {
+    public static Direction Opposite(this Direction direction)
+    {
+        return direction switch
+        {
+            Direction.Up => Direction.Down,
+            Direction.Left => Direction.Right,
+            Direction.Right => Direction.Left,
+            Direction.Down => Direction.Up
+        };
+    }
     public static Direction FromArrow(this Direction dir, char arrow)
     {
         return arrow switch
