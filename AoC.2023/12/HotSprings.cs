@@ -80,6 +80,7 @@ public class HotSprings : IAoCDay<long>
             {
                 int firstValid = IndexOfValidPosition(str, checksum[0], i);
                 if (firstValid == -1) return sum;
+                bool exactMatch = IsExactMatch(str, firstValid, checksum[0]);
                 i = firstValid + 1;
                 string newStr = InsertInstring(str, firstValid, checksum[0]);
                 if (newStr.Count(x => x == '#') > totalSum) continue;
@@ -89,9 +90,15 @@ public class HotSprings : IAoCDay<long>
                     sum++;
                     continue;
                 }
-                sum += RValids(newStr, newChecksum, firstValid + 1, totalSum);
+                sum += RValids(newStr, newChecksum, firstValid + checksum[0], totalSum);
+                if (exactMatch) break;
             }
             return sum;
+        }
+
+        private bool IsExactMatch(string str, int firstValid, int v)
+        {
+            return str.Substring(firstValid, v).All(x => x == '#');
         }
 
         public int IndexOfValidPosition(string s, int lengthToPlace, int startFrom = 0)
