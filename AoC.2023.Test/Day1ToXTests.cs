@@ -14,6 +14,7 @@ using AoC._2023._13;
 using AoC._2023._14;
 using AoC._2023._15;
 using AoC._2023._16;
+using AoC._2023._17;
 using AoC._2023._18;
 using AoC.Common;
 using FluentAssertions;
@@ -158,6 +159,13 @@ public class Day1ToXTests
     public void Day16_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new LavaEnergizing().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    //[Theory]
+    //[InlineData("17/t1.txt", 102, null)]
+    //[InlineData("17/input.txt", 1, null)]
+    public void Day17_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new ClumsyCrucible().Test(path, expectedPartOne, expectedPartTwo);
     }
 
     [Theory]

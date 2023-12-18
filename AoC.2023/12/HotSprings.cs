@@ -52,7 +52,8 @@ public class HotSprings : IAoCDay<long>
             List<int> checksum = checksumString.Split(',').Select(int.Parse).ToList();
             conditions.Add(new(checksum, springs));
         }
-        Parallel.ForEach(conditions, condition =>
+
+        Parallel.ForEach(conditions, new ParallelOptions { MaxDegreeOfParallelism = 23 }, condition =>
         {
             condition.CalculateValids();
         });
@@ -61,10 +62,12 @@ public class HotSprings : IAoCDay<long>
 
     public class SpringCondition
     {
+        private Dictionary<string, long> _dict;
         public SpringCondition(List<int> checksum, string springs)
         {
             Checksum = checksum;
             Springs = springs;
+            _dict = new();
         }
 
         public void CalculateValids()
@@ -74,26 +77,32 @@ public class HotSprings : IAoCDay<long>
 
         public long RValids(string str, List<int> checksum, int startFrom, int totalSum)
         {
-            long sum = 0;
-
-            for (int i = startFrom; i + (checksum[0] - 1) < str.Length;)
+            int si = startFrom - 1 < 0 ? 0 : startFrom - 1;
+            string key = $"{str[(si)..]};{string.Join(',', checksum)};{startFrom};{str.Count(x => x == '#')}";
+            if (!_dict.TryGetValue(key, out long knownSum))
             {
-                int firstValid = IndexOfValidPosition(str, checksum[0], i);
-                if (firstValid == -1) return sum;
-                bool exactMatch = IsExactMatch(str, firstValid, checksum[0]);
-                i = firstValid + 1;
-                string newStr = InsertInstring(str, firstValid, checksum[0]);
-                if (newStr.Count(x => x == '#') > totalSum) continue;
-                List<int> newChecksum = checksum[1..];
-                if (newChecksum.Count == 0)
+                long sum = 0;
+                for (int i = startFrom; i + (checksum[0] - 1) < str.Length;)
                 {
-                    sum++;
-                    continue;
+                    int firstValid = IndexOfValidPosition(str, checksum[0], i);
+                    if (firstValid == -1) return sum;
+                    bool exactMatch = IsExactMatch(str, firstValid, checksum[0]);
+                    i = firstValid + 1;
+                    string newStr = InsertInstring(str, firstValid, checksum[0]);
+                    if (newStr.Count(x => x == '#') > totalSum) continue;
+                    List<int> newChecksum = checksum[1..];
+                    if (newChecksum.Count == 0)
+                    {
+                        sum++;
+                        continue;
+                    }
+                    sum += RValids(newStr, newChecksum, firstValid + checksum[0], totalSum);
+                    if (exactMatch) break;
                 }
-                sum += RValids(newStr, newChecksum, firstValid + checksum[0], totalSum);
-                if (exactMatch) break;
+                if (sum > 0) _dict.Add(key, sum);
+                return sum;
             }
-            return sum;
+            return knownSum;
         }
 
         private bool IsExactMatch(string str, int firstValid, int v)
