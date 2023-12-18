@@ -85,7 +85,17 @@ public record Position<T> where T : IBinaryInteger<T>
                 break;
         }
     }
+    public Position<T> CopyAndMove(Direction direction, T steps)
+    {
+        Position<T> copy = new Position<T>(X, Y);
+        copy.Move(direction, steps);
+        return copy;
+    }
 
+    public Position<T> Copy()
+    {
+        return new Position<T>(X, Y);
+    }
     public (T X, T Y) Distance(Position<T> b)
     {
         T x = DistanceX(b);

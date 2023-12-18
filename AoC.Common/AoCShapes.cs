@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace AoC.Common;
 
@@ -31,6 +33,60 @@ public class AoCShapes
             j = i;
         }
         return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="polygon"></param>
+    /// <returns></returns>
+    public static int AreaOfSimpelPolygon(List<Position<int>> polygon, bool includeOutline)
+    {
+        polygon.Add(polygon[0]);
+        var area = Math.Abs(polygon.Take(polygon.Count - 1)
+           .Select((p, i) => (polygon[i + 1].X - p.X) * (polygon[i + 1].Y + p.Y))
+           .Sum() / 2);
+
+        //Inkludera själva polygonen
+        int outline = 0;
+        if (includeOutline)
+        {
+            for (int i = 0; i < polygon.Count - 1; i++)
+            {
+                outline += (Math.Abs(polygon[i].DistanceX(polygon[i + 1])) + Math.Abs(polygon[i].DistanceY(polygon[i + 1])));
+            }
+            if (outline > 0) area += (outline / 2)+1;
+        }
+        return area;
+    }
+    public static long AreaOfSimpelPolygon(List<Position<long>> polygon, bool includeOutline)
+    {
+        polygon.Add(polygon[0]);
+        var area = Math.Abs(polygon.Take(polygon.Count - 1)
+           .Select((p, i) => (polygon[i + 1].X - p.X) * (polygon[i + 1].Y + p.Y))
+           .Sum() / 2);
+
+        //Inkludera själva polygonen
+        long outline = 0;
+        if (includeOutline)
+        {
+            for (int i = 0; i < polygon.Count-1; i++)
+            {
+                outline += (Math.Abs(polygon[i].DistanceX(polygon[i + 1])) + Math.Abs(polygon[i].DistanceY(polygon[i + 1])));
+            }
+            if (outline > 0) area += (outline / 2)+1;
+        }
+
+        return area;
+    }
+    private static T GSum<T>(IEnumerable<T> collection) where T : IBinaryInteger<T>
+    {
+        T sum = T.Zero;
+        foreach ( var item in collection)
+        {
+            sum += item;
+        }
+        return sum;
     }
     /// <summary>
     /// Kollar om x,y är i en polygon bestående av en lista av array med x,y, HELTAl ska användas i den här implementationen
