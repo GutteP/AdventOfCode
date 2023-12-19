@@ -16,6 +16,7 @@ using AoC._2023._15;
 using AoC._2023._16;
 using AoC._2023._17;
 using AoC._2023._18;
+using AoC._2023._19;
 using AoC.Common;
 using FluentAssertions;
 
@@ -174,5 +175,13 @@ public class Day1ToXTests
     public void Day18_Test(string path, int? expectedPartOne, long? expectedPartTwo)
     {
         new LavaductLagoon().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("19/t1.txt", 19114, null)]
+    //[InlineData("19/t1.txt", null, 167409079868000L)]
+    [InlineData("19/input.txt", 398527, null)]
+    public void Day19_Test(string path, int? expectedPartOne, long? expectedPartTwo)
+    {
+        new Aplenty().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
