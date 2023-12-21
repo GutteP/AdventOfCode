@@ -17,6 +17,8 @@ using AoC._2023._16;
 using AoC._2023._17;
 using AoC._2023._18;
 using AoC._2023._19;
+using AoC._2023._20;
+using AoC._2023._21;
 using AoC.Common;
 using FluentAssertions;
 
@@ -183,5 +185,23 @@ public class Day1ToXTests
     public void Day19_Test(string path, int? expectedPartOne, long? expectedPartTwo)
     {
         new Aplenty().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("20/t1.txt", 32000000L, null)] // 8000 * 4000
+    [InlineData("20/t2.txt", 11687500L, null)] // 4250 * 2750
+    [InlineData("20/input.txt", 821985143L, null)] // p2, inget svar efter 7h
+    //[InlineData("20/input.txt", null, 1L)] // 1 000 000 8,4 sek -> 7,3 = 142045/s
+    public void Day20_Test(string path, long? expectedPartOne, long? expectedPartTwo)
+    {
+        new PulsePropagation().Test(path, expectedPartOne, expectedPartTwo);
+    }
+
+    // Del två är inte löst, behöver en smartare implementation. Redan vid 500 tar det en halv minut, så 26501365 är kört.. 
+    [Theory]
+    [InlineData("21/t1.txt", 42, 2665)]
+    [InlineData("21/input.txt", 3594, null)]
+    public void Day21_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new StepCounter().Test(path, expectedPartOne, expectedPartTwo);
     }
 }
