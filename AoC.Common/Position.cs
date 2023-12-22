@@ -45,26 +45,6 @@ public record Position<T> where T : IBinaryInteger<T>
         return InRange(T.Zero, xUpper, T.Zero, yUpper);
     }
 
-    //public void Move(Direction direction, T steps)
-    //{
-    //    switch (direction)
-    //    {
-    //        case Direction.Up:
-    //            Y += steps;
-    //            break;
-    //        case Direction.Right:
-    //            X += steps;
-    //            break;
-    //        case Direction.Down:
-    //            Y -= steps;
-    //            break;
-    //        case Direction.Left:
-    //            X -= steps;
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
     public void Move(Direction direction, T steps)
     {
         switch (direction)
