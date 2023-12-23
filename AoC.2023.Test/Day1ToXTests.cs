@@ -20,6 +20,7 @@ using AoC._2023._19;
 using AoC._2023._20;
 using AoC._2023._21;
 using AoC._2023._22;
+using AoC._2023._23;
 using AoC.Common;
 using FluentAssertions;
 
@@ -212,5 +213,12 @@ public class Day1ToXTests
     public void Day22_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new SandSlabs().Test(path, expectedPartOne, expectedPartTwo);
+    }
+    [Theory]
+    [InlineData("23/t1.txt", 94, null)]
+    [InlineData("23/input.txt", 1, null)]
+    public void Day23_Test(string path, int? expectedPartOne, int? expectedPartTwo)
+    {
+        new ALongWalk().Test(path, expectedPartOne, expectedPartTwo);
     }
 }

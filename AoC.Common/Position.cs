@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Transactions;
 
 namespace AoC.Common;
 public record Position<T> where T : IBinaryInteger<T>
@@ -121,5 +122,23 @@ public class Positions<T> where T : IBinaryInteger<T>
             adjacent.Remove(p);
         }
         return adjacent.ToList();
+    }
+}
+
+public static class MapPositionHelper
+{
+    public static TMap Current<TMap>(this TMap[,] map, Position<int> position)
+    {
+        return map[position.Y, position.X];
+    }
+    public static TMap Current<TMap>(this TMap[,] map, Position<long> position)
+    {
+        return map[position.Y, position.X];
+    }
+    public static bool On<TMap>(this TMap[,] map, Position<int> position)
+    {
+        if (position.Y < 0 || position.Y >= map.GetLength(0)) return false;
+        if (position.X < 0 || position.X >= map.GetLength(1)) return false;
+        return true;
     }
 }
