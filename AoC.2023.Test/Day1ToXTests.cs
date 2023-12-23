@@ -215,8 +215,9 @@ public class Day1ToXTests
         new SandSlabs().Test(path, expectedPartOne, expectedPartTwo);
     }
     [Theory]
-    [InlineData("23/t1.txt", 94, null)]
-    [InlineData("23/input.txt", 1, null)]
+    [InlineData("23/t1.txt", 94, 154)]
+    //[InlineData("23/input.txt", 2178, 1)]
+    [InlineData("23/input.txt", 2178, null)]
     public void Day23_Test(string path, int? expectedPartOne, int? expectedPartTwo)
     {
         new ALongWalk().Test(path, expectedPartOne, expectedPartTwo);
