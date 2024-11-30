@@ -4,7 +4,7 @@ public class ALongWalk : IAoCDay<int>
 {
     public DayRunner<int> Runner()
     {
-        return new DayRunner<int>(new Runner<char[,], int>(Transformer, Solve), null);
+        return new DayRunner<int>(new Runner<char[,], int>(Transformer, Icy), new Runner<char[,], int>(Transformer, Warm));
     }
 
     private char[,] Transformer(string path)
@@ -18,20 +18,35 @@ public class ALongWalk : IAoCDay<int>
     private const char PATH = '.';
 
 
-    private int Solve(char[,] map)
+    private int Icy(char[,] map)
     {
         Map = map;
         Goal = new(map.GetLength(1) - 2, map.GetLength(0) - 1);
         Position<int> start = new(1, 0);
-        var possible = RandomWalk(start, new List<Position<int>>() { start });
+        var possible = RandomWalk(start, new HashSet<Position<int>>() { start });
 
-        foreach (var path in possible)
-        {
-            string m = MapPrinter(path);
-        }
+        //foreach (var path in possible)
+        //{
+        //    string m = MapPrinter(path);
+        //}
 
         int max = possible.Max(x => x.Count);
-        return max;
+        return max-1;
+    }
+    private int Warm(char[,] map)
+    {
+        Map = map;
+        Goal = new(map.GetLength(1) - 2, map.GetLength(0) - 1);
+        Position<int> start = new(1, 0);
+        var possible = RandomWalkGlobalWarming(start, new HashSet<Position<int>>() { start });
+
+        //foreach (var path in possible)
+        //{
+        //    string m = MapPrinter(path);
+        //}
+
+        int max = possible.Max(x => x.Count);
+        return max - 1;
     }
 
     public string MapPrinter(IEnumerable<Position<int>> positions)
@@ -54,9 +69,8 @@ public class ALongWalk : IAoCDay<int>
         return stringMap;
     }
 
-    private IEnumerable<HashSet<Position<int>>> RandomWalk(Position<int> current, IEnumerable<Position<int>> pVisited)
+    private IEnumerable<HashSet<Position<int>>> RandomWalk(Position<int> current, HashSet<Position<int>> visited)
     {
-        HashSet<Position<int>> visited = new(pVisited);
         List<HashSet<Position<int>>> result = new();
         if (current == Goal)
         {
@@ -66,19 +80,12 @@ public class ALongWalk : IAoCDay<int>
         char currentTile = Map.Current(current);
         if (currentTile != PATH)
         {
-            if (currentTile == WOOD)
-            {
-
-            }
+            HashSet<Position<int>> newVisited = new(visited);
             Direction dir = Direction.None.FromArrow(currentTile);
             var moved = current.CopyAndMove(dir, 1);
-            if (visited.Add(moved))
+            if (newVisited.Add(moved))
             {
-                if (current.Y == 11 && current.X == 21)
-                {
-
-                }
-                result.AddRange(RandomWalk(moved, visited));
+                result.AddRange(RandomWalk(moved, newVisited));
                 return result;
             }
             else return result;
@@ -88,12 +95,35 @@ public class ALongWalk : IAoCDay<int>
             var neighbors = current.Neighbors(false);
             foreach (var neighbor in neighbors)
             {
+                HashSet<Position<int>> newVisited = new(visited);
                 if (!Map.On(neighbor)) continue;
                 if (Map.Current(neighbor) == WOOD) continue;
-                if (!visited.Add(neighbor)) continue;
-                result.AddRange(RandomWalk(neighbor, visited));
+                if (!newVisited.Add(neighbor)) continue;
+                result.AddRange(RandomWalk(neighbor, newVisited));
             }
             return result;
         }
+    }
+    private IEnumerable<HashSet<Position<int>>> RandomWalkGlobalWarming(Position<int> current, HashSet<Position<int>> visited)
+    {
+        List<HashSet<Position<int>>> result = new();
+        if (current == Goal)
+        {
+            result.Add(visited);
+            return result;
+        }
+        var neighbors = current.Neighbors(false);
+        foreach (var neighbor in neighbors)
+        {
+            if (!Map.On(neighbor)) continue;
+            if (Map.Current(neighbor) == WOOD) continue;
+            if (visited.Contains(neighbor)) continue;
+            HashSet<Position<int>> newVisited = new(visited)
+            {
+                neighbor
+            };
+            result.AddRange(RandomWalkGlobalWarming(neighbor, newVisited));
+        }
+        return result;
     }
 }
