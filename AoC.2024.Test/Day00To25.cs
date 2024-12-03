@@ -56,7 +56,7 @@ public class Day00To25
     }
     [Theory]
     [InlineData("03/t2.txt", 48)]
-    [InlineData("03/input.txt", 87163705L)]
+    [InlineData("03/input.txt", 87163705)]
     public void Day03_2(string input, int expected)
     {
         new D03().PartTwo(input).Should().Be(expected);

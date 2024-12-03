@@ -1,10 +1,8 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AoC._2024;
+﻿namespace AoC._2024;
 
 public class D03
 {
-    public int? PartOne(string inputPath, string? option1 = null, int? option2 = null)
+    public int? PartOne(string inputPath)
     {
         string inputString = InputReader.ReadString(inputPath);
 
@@ -16,15 +14,15 @@ public class D03
         return sum;
     }
 
-    public long? PartTwo(string inputPath, string? option1 = null, int? option2 = null)
+    public int? PartTwo(string inputPath)
     {
         string inputString = InputReader.ReadString(inputPath);
 
-        long sum = 0;
+        int sum = 0;
         bool dont = false;
         foreach (Match m in Regex.Matches(inputString, "mul[(]\\d+,\\d+[)]|do[(][)]|don't[(][)]"))
         {
-            if (m.Value.StartsWith("mul") && !dont)
+            if (!dont && m.Value.StartsWith("mul"))
             {
                 sum += Mul(m.Value);
             }
@@ -44,8 +42,7 @@ public class D03
         Match m = Regex.Match(mul, "\\d+,\\d+");
         if (m.Success)
         {
-            var ns = m.Value.Split(',').Select(x => int.Parse(x));
-            return ns.First() * ns.Last();
+            return m.Value.Split(',').Select(x => int.Parse(x)).Aggregate((a, b) => a * b);
         }
         else throw new Exception();
     }
