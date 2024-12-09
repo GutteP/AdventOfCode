@@ -137,4 +137,34 @@ public class Day00To25
     {
         new D08().PartTwo(input).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("09/t1.txt", 1928L)]
+    [InlineData("09/input.txt", 6349606724455L)]
+    public void Day09_1(string input, long expected)
+    {
+        new D09().PartOne(input).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("09/t1.txt", 2858L)]
+    [InlineData("09/input.txt", 6376648986651L)]
+    public void Day09_2(string input, long expected)
+    {
+        new D09().PartTwo(input).Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData("10/t1.txt", 0)]
+    [InlineData("10/input.txt", 0)]
+    public void Day10_1(string input, long expected)
+    {
+        new D10().PartOne(input).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("10/t1.txt", 0)]
+    [InlineData("10/input.txt", 0)]
+    public void Day10_2(string input, long expected)
+    {
+        new D10().PartTwo(input).Should().Be(expected);
+    }
 }
