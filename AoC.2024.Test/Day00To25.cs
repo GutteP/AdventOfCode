@@ -154,15 +154,15 @@ public class Day00To25
     }
 
     [Theory]
-    [InlineData("10/t1.txt", 0)]
-    [InlineData("10/input.txt", 0)]
+    [InlineData("10/t1.txt", 36)]
+    [InlineData("10/input.txt", 489L)]
     public void Day10_1(string input, long expected)
     {
         new D10().PartOne(input).Should().Be(expected);
     }
     [Theory]
-    [InlineData("10/t1.txt", 0)]
-    [InlineData("10/input.txt", 0)]
+    [InlineData("10/t1.txt", 81)]
+    [InlineData("10/input.txt", 1086L)]
     public void Day10_2(string input, long expected)
     {
         new D10().PartTwo(input).Should().Be(expected);
