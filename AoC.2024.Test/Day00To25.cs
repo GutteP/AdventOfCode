@@ -180,8 +180,8 @@ public class Day00To25
     [InlineData("11/t1.txt", 22L, 6)]
     [InlineData("11/t1.txt", 55312L, 25)]
     [InlineData("11/input.txt", 189167L, 25)]
-    [InlineData("11/t1.txt", 55312L, 75)]
-    [InlineData("11/input.txt", 0L, 75)]
+    [InlineData("11/t1.txt", 65601038650482L, 75)]
+    [InlineData("11/input.txt", 225253278506288L, 75)]
     public void Day11_2(string input, long expected, int blinks)
     {
         new D11().PartTwo(input, blinks).Should().Be(expected);
