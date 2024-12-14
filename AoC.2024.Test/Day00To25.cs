@@ -186,4 +186,23 @@ public class Day00To25
     {
         new D11().PartTwo(input, blinks).Should().Be(expected);
     }
+    [Theory]
+    [InlineData("12/t1.txt", 140L)]
+    [InlineData("12/t2.txt", 772L)]
+    [InlineData("12/t3.txt", 1930L)]
+    [InlineData("12/input.txt", 1489582L)]
+    public void Day12_1(string input, long expected)
+    {
+        new D12().PartOne(input).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("12/t1.txt", 80)]
+    [InlineData("12/t4.txt", 236)]
+    [InlineData("12/t5.txt", 368)]
+    [InlineData("12/t3.txt", 1206)]
+    [InlineData("12/input.txt", 914966L)]
+    public void Day12_2(string input, long expected)
+    {
+        new D12().PartTwo(input).Should().Be(expected);
+    }
 }
