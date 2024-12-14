@@ -26,27 +26,12 @@ public class D13
     }
 }
 
-//Button A: X+42, Y+24
-//Button B: X+23, Y+55
-//Prize: X=18849, Y=8875
-
 public static class D13Extensions
 {
     public static List<(int A, int B)> Check(this ((int X, int Y) A, (int X, int Y) B, (int X, int Y) Prize) game, int? max)
     {
-        //decimal stopXA = (decimal)game.Prize.X / (decimal)game.A.X;
-        //decimal stopYA = (decimal)game.Prize.Y / (decimal)game.A.Y;
-        //decimal stopXB = (decimal)game.Prize.X / (decimal)game.B.X;
-        //decimal stopYB = (decimal)game.Prize.Y / (decimal)game.B.Y;
         int stopXA = game.Prize.X / game.A.X;
         int stopYA = game.Prize.Y / game.A.Y;
-        //int stopXB = game.Prize.X / game.B.X;
-        //int stopYB = game.Prize.Y / game.B.Y;
-
-        //int stopMXA = game.Prize.X % game.A.X;
-        //int stopMYA = game.Prize.Y % game.A.Y;
-        //int stopMXB = game.Prize.X % game.B.X;
-        //int stopMYB = game.Prize.Y % game.B.Y;
 
         int stopA = Math.Min(stopXA, stopYA);
         List<(int A, int B)> solutions = new();
@@ -54,17 +39,6 @@ public static class D13Extensions
         {
             int a = stopA - i;
             int diffA = game.Prize.X - (game.A.X * a);
-            if (diffA == 0)
-            {
-                if (game.A.Y * a == game.Prize.Y)
-                {
-                    if (max == null || a <= max)
-                    {
-                        solutions.Add((a, 0));
-                    }
-                }
-                continue;
-            }
 
             if (diffA % game.B.X == 0)
             {
@@ -77,10 +51,8 @@ public static class D13Extensions
                     }
                 }
             }
-
         }
         return solutions;
-
     }
 
 
