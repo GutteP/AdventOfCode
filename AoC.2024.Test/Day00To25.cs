@@ -214,11 +214,24 @@ public class Day00To25
     {
         new D13().PartOne(input).Should().Be(expected);
     }
+    //[Theory]
+    //[InlineData("13/t1.txt", 0)]
+    //[InlineData("13/input.txt", 0)]
+    //public void Day13_2(string input, long expected)
+    //{
+    //    new D13().PartTwo(input).Should().Be(expected);
+    //}
+
     [Theory]
-    [InlineData("13/t1.txt", 0)]
-    [InlineData("13/input.txt", 0)]
-    public void Day13_2(string input, long expected)
+    [InlineData("14/t1.txt", 12, 11, 7)]
+    [InlineData("14/t2.txt", 0, 11, 7)]
+    [InlineData("14/input.txt", 208437768L, 101, 103)]
+    public void Day14_1(string input, long expected, int xSize, int ySize)
     {
-        new D13().PartTwo(input).Should().Be(expected);
+        new D14().PartOne(input, xSize, ySize).Should().Be(expected);
     }
+
+    // Dag 14 del 2 löstes med hjälp av Aoc.2024.14.2 projektet.
+
+
 }
