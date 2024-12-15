@@ -1,67 +1,143 @@
---- Day 11: Plutonian Pebbles ---
----------------------------------
+--- Day 14: Restroom Redoubt ---
+--------------------------------
 
-The ancient civilization on [Pluto](https://adventofcode.com/2019/day/20) was known for its ability to manipulate spacetime, and while The Historians explore their infinite corridors, you've noticed a strange set of physics-defying stones.
+One of The Historians needs to use the bathroom; fortunately, you know there's a bathroom near an unvisited location on their list, and so you're all quickly teleported directly to the lobby of Easter Bunny Headquarters.
 
-At first glance, they seem like normal stones: they're arranged in a perfectly straight line, and each stone has a number engraved on it.
+Unfortunately, EBHQ seems to have "improved" bathroom security again after your last [visit](https://adventofcode.com/2016/day/2). The area outside the bathroom is swarming with robots!
 
-The strange part is that every time you blink, the stones change.
+To get The Historian safely to the bathroom, you'll need a way to predict where the robots will be in the future. Fortunately, they all seem to be moving on the tile floor in predictable straight lines.
 
-Sometimes, the number engraved on a stone changes. Other times, a stone might split in two, causing all the other stones to shift over a bit to make room in their perfectly straight line.
-
-As you observe them for a while, you find that the stones have a consistent behavior. Every time you blink, the stones each simultaneously change according to the first applicable rule in this list:
-
--   If the stone is engraved with the number `0`, it is replaced by a stone engraved with the number `1`.
--   If the stone is engraved with a number that has an even number of digits, it is replaced by two stones. The left half of the digits are engraved on the new left stone, and the right half of the digits are engraved on the new right stone. (The new numbers don't keep extra leading zeroes: `1000` would become stones `10` and `0`.)
--   If none of the other rules apply, the stone is replaced by a new stone; the old stone's number multiplied by 2024 is engraved on the new stone.
-
-No matter how the stones change, their order is preserved, and they stay on their perfectly straight line.
-
-How will the stones evolve if you keep blinking at them? You take a note of the number engraved on each stone in the line (your puzzle input).
-
-If you have an arrangement of five stones engraved with the numbers `0 1 10 99 999` and you blink once, the stones transform as follows:
-
--   The first stone, `0`, becomes a stone marked `1`.
--   The second stone, `1`, is multiplied by 2024 to become `2024`.
--   The third stone, `10`, is split into a stone marked `1` followed by a stone marked `0`.
--   The fourth stone, `99`, is split into two stones marked `9`.
--   The fifth stone, `999`, is replaced by a stone marked `2021976`.
-
-So, after blinking once, your five stones would become an arrangement of seven stones engraved with the numbers `1 2024 1 0 9 9 2021976`.
-
-Here is a longer example:
+You make a list (your puzzle input) of all of the robots' current positions (`p`) and velocities (`v`), one robot per line. For example:
 
 ```
-Initial arrangement:
-125 17
-
-After 1 blink:
-253000 1 7
-
-After 2 blinks:
-253 0 2024 14168
-
-After 3 blinks:
-512072 1 20 24 28676032
-
-After 4 blinks:
-512 72 2024 2 0 2 4 2867 6032
-
-After 5 blinks:
-1036288 7 2 20 24 4048 1 4048 8096 28 67 60 32
-
-After 6 blinks:
-2097446912 14168 4048 2 0 2 4 40 48 2024 40 48 80 96 2 8 6 7 6 0 3 2
+p=0,4 v=3,-3
+p=6,3 v=-1,-3
+p=10,3 v=-1,2
+p=2,0 v=2,-1
+p=0,0 v=1,3
+p=3,0 v=-2,-2
+p=7,6 v=-1,-3
+p=3,0 v=-1,-2
+p=9,3 v=2,3
+p=7,3 v=-1,2
+p=2,4 v=2,-3
+p=9,5 v=-3,-3
 
 ```
 
-In this example, after blinking six times, you would have `22` stones. After blinking 25 times, you would have `55312` stones!
+Each robot's position is given as `p=x,y` where `x` represents the number of tiles the robot is from the left wall and `y` represents the number of tiles from the top wall (when viewed from above). So, a position of `p=0,0` means the robot is all the way in the top-left corner.
 
-Consider the arrangement of stones in front of you. How many stones will you have after blinking 25 times?
+Each robot's velocity is given as `v=x,y` where `x` and `y` are given in tiles per second. Positive `x` means the robot is moving to the right, and positive `y` means the robot is moving down. So, a velocity of `v=1,-2` means that each second, the robot moves `1` tile to the right and `2` tiles up.
+
+The robots outside the actual bathroom are in a space which is `101` tiles wide and `103` tiles tall (when viewed from above). However, in this example, the robots are in a space which is only `11` tiles wide and `7` tiles tall.
+
+The robots are good at navigating over/under each other (due to a combination of springs, extendable legs, and quadcopters), so they can share the same tile and don't interact with each other. Visually, the number of robots on each tile in this example looks like this:
+
+```
+1.12.......
+...........
+...........
+......11.11
+1.1........
+.........1.
+.......1...
+
+```
+
+These robots have a unique feature for maximum bathroom security: they can teleport. When a robot would run into an edge of the space they're in, they instead teleport to the other side, effectively wrapping around the edges. Here is what robot `p=2,4 v=2,-3` does for the first few seconds:
+
+```
+Initial state:
+...........
+...........
+...........
+...........
+..1........
+...........
+...........
+
+After 1 second:
+...........
+....1......
+...........
+...........
+...........
+...........
+...........
+
+After 2 seconds:
+...........
+...........
+...........
+...........
+...........
+......1....
+...........
+
+After 3 seconds:
+...........
+...........
+........1..
+...........
+...........
+...........
+...........
+
+After 4 seconds:
+...........
+...........
+...........
+...........
+...........
+...........
+..........1
+
+After 5 seconds:
+...........
+...........
+...........
+.1.........
+...........
+...........
+...........
+
+```
+
+The Historian can't wait much longer, so you don't have to simulate the robots for very long. Where will the robots be after `100` seconds?
+
+In the above example, the number of robots on each tile after 100 seconds has elapsed looks like this:
+
+```
+......2..1.
+...........
+1..........
+.11........
+.....1.....
+...12......
+.1....1....
+
+```
+
+To determine the safest area, count the number of robots in each quadrant after 100 seconds. Robots that are exactly in the middle (horizontally or vertically) don't count as being in any quadrant, so the only relevant robots are:
+
+```
+..... 2..1.
+..... .....
+1.... .....
+
+..... .....
+...12 .....
+.1... 1....
+
+```
+
+In this example, the quadrants contain `1`, `3`, `4`, and `1` robot. Multiplying these together gives a total safety factor of `12`.
+
+Predict the motion of the robots in your list within a space which is `101` tiles wide and `103` tiles tall. What will the safety factor be after exactly 100 seconds have elapsed?
 
 --- Part Two ---
 ----------------
 
-The Historians sure are taking a long time. To be fair, the infinite corridors are very large.
+During the bathroom break, someone notices that these robots seem awfully similar to ones built and used at the North Pole. If they're the same type of robots, they should have a hard-coded Easter egg: very rarely, most of the robots should arrange themselves into a picture of a Christmas tree.
 
-How many stones would you have after blinking a total of 75 times?
+What is the fewest number of seconds that must elapse for the robots to display the Easter egg?
