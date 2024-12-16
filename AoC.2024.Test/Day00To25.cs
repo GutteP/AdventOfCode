@@ -214,13 +214,14 @@ public class Day00To25
     {
         new D13().PartOne(input).Should().Be(expected);
     }
-    //[Theory]
-    //[InlineData("13/t1.txt", 0)]
-    //[InlineData("13/input.txt", 0)]
-    //public void Day13_2(string input, long expected)
-    //{
-    //    new D13().PartTwo(input).Should().Be(expected);
-    //}
+
+    [Theory]
+    [InlineData("13/t1.txt", 875318608908L)]
+    [InlineData("13/input.txt", 87550094242995L)]
+    public void Day13_2(string input, long expected)
+    {
+        new D13().PartTwo(input).Should().Be(expected);
+    }
 
     [Theory]
     [InlineData("14/t1.txt", 12, 11, 7)]

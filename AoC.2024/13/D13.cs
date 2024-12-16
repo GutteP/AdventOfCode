@@ -21,21 +21,100 @@ public class D13
     public long? PartTwo(string inputPath)
     {
         List<((int X, int Y) A, (int X, int Y) B, (long X, long Y) Prize)> games = InputReader.ReadLines(inputPath).ToGames(partTwo: true);
-        List<List<(long A, long B)>> allSolutions = new();
+
+        List<(long A, long B)> allSolutions = new();
         foreach (var game in games)
         {
-            var solutions = game.Check(null);
-            if (solutions.Count > 0)
+            if (game.TryToCalculate(out (long X, long Y) solution))
             {
-                allSolutions.Add(solutions);
+                allSolutions.Add(solution);
             }
         }
-        return allSolutions.Select(x => x.Select(s => s.A * 3 + s.B).Min()).Sum();
+        return allSolutions.Select(s => s.A * 3 + s.B).Sum();
     }
 }
 
 public static class D13Extensions
 {
+    public static bool TryToCalculate(this ((int X, int Y) A, (int X, int Y) B, (long X, long Y) Prize) game, out (long X, long Y) solution)
+    {
+        // Button A: X + 26, Y + 66                         ===> ax, ay
+        // Button B: X + 67, Y + 21                         ===> bx, by
+        // Prize: X = 10000000012748, Y = 10000000012176    ===> px, py
+        // y = ((px * ay)-(py*ax))/((bx*ay)-(by*ax))
+        // x = (px - (bx*y))/ax
+
+        double y = ((game.Prize.X * game.A.Y) - (game.Prize.Y * game.A.X)) / ((game.B.X * game.A.Y) - (game.B.Y * game.A.X));
+        double x = (game.Prize.X - (game.B.X * y)) / game.A.X;
+
+        solution = ((long)x, (long)y);
+
+        return y % 1 == 0 && x % 1 == 0 && IsCorrect(game, solution);
+
+        // Simultaneous equations by elimination
+        // https://thirdspacelearning.com/gcse-maths/algebra/simultaneous-equations/
+        //
+        // Button A: X + 26, Y + 66                         ===> ax, ay
+        // Button B: X + 67, Y + 21                         ===> bx, by
+        // Prize: X = 10000000012748, Y = 10000000012176    ===> px, py
+        // 
+        // x* ax + y * bx = px
+        // x* ay + y * by = py
+        // 
+        // Ställ upp
+        // A) 26x + 67y = 10000000012748
+        // B) 66x + 21y = 10000000012176
+        // 
+        // Multiplicera A med ay och B med ax
+        // (26x * 66) +(67y * 66) = (10000000012748 * 66)
+        // (66x * 26 + (21y * 26) = (10000000012176 * 26)
+        //  
+        // Då får vi:
+        // 1716x + 4422y = 660000000841368
+        // 1716x + 546y = 260000000316576
+        //  
+        // Förenkla:
+        // (1716x - 1716x) +(4422y - 546y) = (660000000841368 - 260000000316576)
+        // 0 + 3876y = 400000000524792
+        // 3876y = 400000000524792
+        //  
+        // Ta fram y
+        // y = 400000000524792 / 3876
+        // y = 103199174542
+        //  
+        // Vi utgick från:
+        // 26x + 67y = 10000000012748
+        // 66x + 21y = 10000000012176
+        //   
+        // Sätt in y:
+        // 26x + 67 * 103199174542 = 10000000012748
+        // 66x + 21 * 103199174542 = 10000000012176
+        //   
+        // Då får vi:
+        // 26x + 6914344694314 = 10000000012748
+        // 66x + 2167182665382 = 10000000012176
+        // 
+        // Förenkla:
+        // 26x = 10000000012748 - 6914344694314
+        // 26x = 3085655318434
+        // x = 3085655318434 / 26
+        // x = 118679050709
+
+        // x = 118679050709
+        // y = 103199174542
+    }
+
+    public static bool IsCorrect(this ((int X, int Y) A, (int X, int Y) B, (long X, long Y) Prize) game, (long X, long Y) solution)
+    {
+        long tpx = game.A.X * solution.X + game.B.X * solution.Y;
+        long tpy = game.A.Y * solution.X + game.B.Y * solution.Y;
+        if (tpx == game.Prize.X && tpy == game.Prize.Y)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public static List<(long A, long B)> Check(this ((int X, int Y) A, (int X, int Y) B, (long X, long Y) Prize) game, int? max)
     {
         long stopXA = game.Prize.X / game.A.X;
