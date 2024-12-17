@@ -234,5 +234,12 @@ public class Day00To25
 
     // Dag 14 del 2 löstes med hjälp av Aoc.2024.14.2 projektet.
 
-
+    [Theory]
+    [InlineData("15/t1.txt", 2028)]
+    [InlineData("15/t2.txt", 10092)]
+    [InlineData("15/input.txt", 0)]
+    public void Day15_1(string input, long expected)
+    {
+        new D15().PartOne(input).Should().Be(expected);
+    }
 }
