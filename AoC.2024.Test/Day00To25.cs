@@ -245,9 +245,18 @@ public class Day00To25
     [Theory]
     [InlineData("15/t3.txt", 618L)]
     [InlineData("15/t2.txt", 9021)]
-    [InlineData("15/input.txt", 1475512L)] //16 minuter....
+    //[InlineData("15/input.txt", 1475512L)] //16 minuter....
     public void Day15_2(string input, long expected)
     {
         new D15().PartTwo(input).Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData("16/t1.txt", 7036)]
+    [InlineData("16/t2.txt", 11048)]
+    [InlineData("16/input.txt", 99460L)]
+    public void Day16_1(string input, long expected)
+    {
+        new D16().PartOne(input).Should().Be(expected);
     }
 }

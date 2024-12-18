@@ -1,4 +1,6 @@
-﻿namespace AoC._2024;
+﻿using System.Diagnostics;
+
+namespace AoC._2024;
 
 public class D15
 {
@@ -22,23 +24,30 @@ public class D15
         return boxesAndRobot.Select(b => b.X * 100 + b.Y).Sum();
     }
 
-
+    // Tar längre och längre tid, i slutet tar vissa 200ms. En uteliggare på över 8000ms
     public long? PartTwo(string inputPath)
     {
         List<string> input = InputReader.ReadLines(inputPath).SecondWarehouse();
         Map = input.ToMap();
         var instructions = input.Instructions();
         (List<Ob> boxesAndRobot, int robot) = input.BoxesAndRobotV2();
-
+        Stopwatch stopwatch = new();
         int robotIndex = robot;
+        List<long> times = new();
         foreach (var instruction in instructions)
         {
+            stopwatch.Restart();
             if (TryMoveOb(robotIndex, instruction, boxesAndRobot, out List<(int Index, Ob Ob)> moved))
             {
                 foreach (var (Index, Ob) in moved)
                 {
                     boxesAndRobot[Index] = Ob;
                 }
+            }
+            stopwatch.Stop();
+            times.Add(stopwatch.ElapsedMilliseconds);
+            if (stopwatch.ElapsedMilliseconds > 1000)
+            {
             }
         }
         boxesAndRobot.RemoveAt(robotIndex);
