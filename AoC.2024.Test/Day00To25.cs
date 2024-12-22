@@ -272,6 +272,7 @@ public class Day00To25
     [InlineData("17/t1.txt", "4,6,3,5,6,3,5,2,1,0")]
     [InlineData("17/t2.txt", "0,1,2")]
     [InlineData("17/t3.txt", "4,2,5,6,7,7,7,7,3,1,0")]
+    [InlineData("17/t4.txt", "5,7,3,0")]
     [InlineData("17/input.txt", "7,0,3,1,2,6,3,7,1")]
     public void Day17_1(string input, string expected)
     {
@@ -281,8 +282,8 @@ public class Day00To25
     [Theory]
     //[InlineData("17/t1.txt", "4,6,3,5,6,3,5,2,1,0")]
     //[InlineData("17/t2.txt", "0,1,2")]
-    [InlineData("17/t3.txt", 117440L)]
-    [InlineData("17/input.txt", 0L)]
+    [InlineData("17/t4.txt", 117440L)]
+    //[InlineData("17/input.txt", 109020013201563L)] // Tar 30 min att köra.. 
     public void Day17_2(string input, long expected)
     {
         new D17().PartTwo(input).Should().Be(expected);
