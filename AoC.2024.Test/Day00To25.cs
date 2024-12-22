@@ -259,4 +259,33 @@ public class Day00To25
     {
         new D16().PartOne(input).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("16/t1.txt", 45)]
+    [InlineData("16/t2.txt", 64)]
+    //[InlineData("16/input.txt", 0)] Tar för lång tid
+    public void Day16_2(string input, long expected)
+    {
+        new D16().PartTwo(input).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("17/t1.txt", "4,6,3,5,6,3,5,2,1,0")]
+    [InlineData("17/t2.txt", "0,1,2")]
+    [InlineData("17/t3.txt", "4,2,5,6,7,7,7,7,3,1,0")]
+    [InlineData("17/input.txt", "7,0,3,1,2,6,3,7,1")]
+    public void Day17_1(string input, string expected)
+    {
+        new D17().PartOne(input).Should().Be(expected);
+    }
+
+    [Theory]
+    //[InlineData("17/t1.txt", "4,6,3,5,6,3,5,2,1,0")]
+    //[InlineData("17/t2.txt", "0,1,2")]
+    [InlineData("17/t3.txt", 117440L)]
+    [InlineData("17/input.txt", 0L)]
+    public void Day17_2(string input, long expected)
+    {
+        new D17().PartTwo(input).Should().Be(expected);
+    }
 }
+
