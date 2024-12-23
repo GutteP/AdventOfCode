@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace AoC._2024;
+﻿namespace AoC._2024;
 
 public class D18
 {
@@ -21,24 +19,27 @@ public class D18
     }
 
 
-    public long? PartTwo(string inputPath, int xSize, int ySize, int simulationLength)
+    public string? PartTwo(string inputPath, int xSize, int ySize, int initialSeed)
     {
         Stack<(int X, int Y)> bytes = new(InputReader.ReadLines(inputPath).Select(x => x.Split(',').Select(y => int.Parse(y)).ToList()).Select(x => (x[0], x[1])).Reverse());
         int[,] map = new int[xSize, ySize];
 
-
-
-        for (int i = 0; i < simulationLength; i++)
+        int i = 1;
+        while (bytes.Count > 0)
         {
             (int X, int Y) b = bytes.Pop();
             map[b.X, b.Y] = -1;
+            if (i > initialSeed)
+            {
+                if (!map.IsPassable((0, 0), new bool[xSize, ySize]))
+                {
+                    return $"{b.X},{b.Y}";
+                }
+            }
+            i++;
         }
-        Stopwatch stopwatch = new();
-        stopwatch.Start();
-        map.CalculateDistances((0, 0));
-        stopwatch.Stop();
-        long time = stopwatch.ElapsedMilliseconds;
-        return map[xSize - 1, ySize - 1];
+
+        return null;
     }
 }
 
@@ -60,6 +61,27 @@ public static class D18Extensions
                 CalculateDistances(map, n);
             }
         }
+    }
+
+    public static bool IsPassable(this int[,] map, (int X, int Y) current, bool[,] visited)
+    {
+        if (current.IsEnd(map))
+        {
+            return true;
+        }
+        if (visited[current.X, current.Y])
+        {
+            return false;
+        }
+        visited[current.X, current.Y] = true;
+        foreach (var n in map.Neighbors(current))
+        {
+            if (IsPassable(map, n, visited))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static bool IsStart(this (int X, int Y) b)

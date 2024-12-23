@@ -294,12 +294,12 @@ public class Day00To25
     {
         new D18().PartOne(input, xSize, ySize, simulationLength).Should().Be(expected);
     }
-    //[Theory]
-    //[InlineData("18/t1.txt", 22, 7, 7, 12)]
-    //[InlineData("18/input.txt", 446L, 71, 71, 1024)]
-    //public void Day18_2(string input, long expected, int xSize, int ySize, int simulationLength)
-    //{
-    //    new D18().PartTwo(input, xSize, ySize, simulationLength).Should().Be(expected);
-    //}
+    [Theory]
+    [InlineData("18/t1.txt", "6,1", 7, 7, 12)]
+    [InlineData("18/input.txt", "39,40", 71, 71, 1024)]
+    public void Day18_2(string input, string expected, int xSize, int ySize, int simulationLength)
+    {
+        new D18().PartTwo(input, xSize, ySize, simulationLength).Should().Be(expected);
+    }
 }
 
