@@ -301,5 +301,20 @@ public class Day00To25
     {
         new D18().PartTwo(input, xSize, ySize, simulationLength).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("19/t1.txt", 6)]
+    [InlineData("19/input.txt", 283)]
+    public void Day19_1(string input, long expected)
+    {
+        new D19().PartOne(input).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("19/t1.txt", 16)]
+    [InlineData("19/input.txt", 615388132411142L)]
+    public void Day19_2(string input, long expected)
+    {
+        new D19().PartTwo(input).Should().Be(expected);
+    }
 }
 
