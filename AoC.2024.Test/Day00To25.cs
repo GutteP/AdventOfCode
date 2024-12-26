@@ -316,5 +316,13 @@ public class Day00To25
     {
         new D19().PartTwo(input).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("20/t1.txt", 44, 0)]
+    [InlineData("20/input.txt", 1507, 100)]
+    public void Day20_1(string input, long expected, int min)
+    {
+        new D20().PartOne(input, min).Should().Be(expected);
+    }
 }
 
