@@ -339,5 +339,14 @@ public class Day00To25
     {
         new D22().PartOne(input, evolutions).Should().Be(expected);
     }
+    [Theory]
+    [InlineData("22/t1.txt", 24, 2000)]
+    [InlineData("22/t2.txt", 23, 2000)]
+    [InlineData("22/t3.txt", 6, 10)]
+    [InlineData("22/input.txt", 2362, 2000)] // -2,1,-1,2
+    public void Day22_2(string input, int expected, int evolutions)
+    {
+        new D22().PartTwo(input, evolutions).Should().Be(expected);
+    }
 }
 
