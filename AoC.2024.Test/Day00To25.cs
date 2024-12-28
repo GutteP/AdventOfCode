@@ -348,5 +348,14 @@ public class Day00To25
     {
         new D22().PartTwo(input, evolutions).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("23/t1.txt", 7, 3)]
+    [InlineData("23/input.txt", 1046L, 3)]
+    public void Day23_1(string input, long expected, int interconnected)
+    {
+        long r = new D23().PartOne(input, interconnected);
+        r.Should().Be(expected);
+    }
 }
 
