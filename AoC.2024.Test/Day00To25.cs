@@ -351,11 +351,19 @@ public class Day00To25
 
     [Theory]
     [InlineData("23/t1.txt", 7, 3)]
+    [InlineData("23/t1.txt", 1, 4)]
     [InlineData("23/input.txt", 1046L, 3)]
+    [InlineData("23/input.txt", 1, 13)]
     public void Day23_1(string input, long expected, int interconnected)
     {
-        long r = new D23().PartOne(input, interconnected);
-        r.Should().Be(expected);
+        new D23().PartOne(input, interconnected).Should().Be(expected);
+    }
+    [Theory]
+    [InlineData("23/t1.txt", "co,de,ka,ta")]
+    [InlineData("23/input.txt", "de,id,ke,ls,po,sn,tf,tl,tm,uj,un,xw,yz")]
+    public void Day23_2(string input, string expected)
+    {
+        new D23().PartTwo(input).Should().Be(expected);
     }
 }
 
