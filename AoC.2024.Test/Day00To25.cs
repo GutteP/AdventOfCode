@@ -365,5 +365,13 @@ public class Day00To25
     {
         new D23().PartTwo(input).Should().Be(expected);
     }
+    [Theory]
+    [InlineData("24/t1.txt", 4)]
+    [InlineData("24/t2.txt", 2024)]
+    [InlineData("24/input.txt", 36035961805936L)]
+    public void Day24_2(string input, long expected)
+    {
+        new D24().PartOne(input).Should().Be(expected);
+    }
 }
 
