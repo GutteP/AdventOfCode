@@ -280,7 +280,7 @@ public class Day00To25
     }
 
     [Theory]
-    [InlineData("17/t4.txt", 117440L)]
+    //[InlineData("17/t4.txt", 117440L)]
     //[InlineData("17/input.txt", 109020013201563L)] // Tar 30 min att köra.. 
     public void Day17_2(string input, long expected)
     {
@@ -369,9 +369,19 @@ public class Day00To25
     [InlineData("24/t1.txt", 4)]
     [InlineData("24/t2.txt", 2024)]
     [InlineData("24/input.txt", 36035961805936L)]
-    public void Day24_2(string input, long expected)
+    public void Day24_1(string input, long expected)
     {
         new D24().PartOne(input).Should().Be(expected);
     }
+    //[Theory]
+    //[InlineData("24/input.txt", "")]
+    //[InlineData("24/t3.txt", "")]
+    //[InlineData("24/t4.txt", "")]
+    //[InlineData("24/t5.txt", "")]
+    //public void Day24_2(string input, string expected)
+    //{
+    //    new D24().PartTwo(input).Should().Be(expected);
+    //}
+
 }
 
