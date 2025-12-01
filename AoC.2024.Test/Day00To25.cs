@@ -279,13 +279,13 @@ public class Day00To25
         new D17().PartOne(input).Should().Be(expected);
     }
 
-    [Theory]
+    //[Theory]
     //[InlineData("17/t4.txt", 117440L)]
-    //[InlineData("17/input.txt", 109020013201563L)] // Tar 30 min att köra.. 
-    public void Day17_2(string input, long expected)
-    {
-        new D17().PartTwo(input).Should().Be(expected);
-    }
+    ////[InlineData("17/input.txt", 109020013201563L)] // Tar 30 min att köra.. 
+    //public void Day17_2(string input, long expected)
+    //{
+    //    new D17().PartTwo(input).Should().Be(expected);
+    //}
 
     [Theory]
     [InlineData("18/t1.txt", 22, 7, 7, 12)]
