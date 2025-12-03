@@ -35,4 +35,20 @@ public class Day00To25
     {
         new D01().PartTwo(input).ShouldBe(expected);
     }
+
+    [Theory]
+    [InlineData("02/t1.txt", 1227775554)]
+    [InlineData("02/input.txt", 15873079081L)]
+    public void Day02_1(string input, long expected)
+    {
+        new D02().PartOne(input).ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("02/t1.txt", 4174379265)]
+    [InlineData("02/input.txt", 22617871034)]
+    public void Day02_2(string input, long expected)
+    {
+        new D02().PartTwo(input).ShouldBe(expected);
+    }
 }
