@@ -75,6 +75,37 @@ public record AoCRange : IEnumerable<long>
         return false;
     }
 
+    public static List<AoCRange> Merge(List<AoCRange> ranges)
+    {
+        while (true)
+        {
+            List<AoCRange> merged = MergeOnStep(ranges);
+            if (merged.Count == ranges.Count)
+            {
+                break;
+            }
+            ranges = merged;
+        }
+        return ranges;
+    }
+    private static List<AoCRange> MergeOnStep(List<AoCRange> ranges)
+    {
+        List<AoCRange> merged = [];
+        foreach (var range in ranges)
+        {
+            AoCRange? overlapping = merged.FirstOrDefault(r => r.Overlaps(range));
+            if (overlapping is not null)
+            {
+                overlapping.ExpandIfOverlaps(range);
+            }
+            else
+            {
+                merged.Add(range);
+            }
+        }
+        return merged;
+    }
+
     public IEnumerator<long> GetEnumerator()
     {
         return new AoCRangeEnum(From, To);
@@ -83,6 +114,11 @@ public record AoCRange : IEnumerable<long>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+    public long Count()
+    {
+        long v = To - From;
+        return v+1;
     }
 
     public class AoCRangeEnum : IEnumerator<long>
