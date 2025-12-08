@@ -131,4 +131,20 @@ public class Day00To25
     {
         new D07().PartTwo(input).ShouldBe(expected);
     }
+
+    [Theory]
+    [InlineData("08/t1.txt", 40, 10)]
+    [InlineData("08/input.txt", 133574L, 1000)]
+    public void Day08_1(string input, int expected, int connections)
+    {
+        new D08().PartOne(input, connections).ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("08/t1.txt", 25272)]
+    [InlineData("08/input.txt", 2435100380L)]
+    public void Day08_2(string input, long expected)
+    {
+        new D08().PartTwo(input).ShouldBe(expected);
+    }
 }
