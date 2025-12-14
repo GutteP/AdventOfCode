@@ -1,46 +1,20 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace AoC.Common;
 
-public class AoCShapes
+public static class AoCShapes
 {
-    /// <summary>
-    /// Kollar om positionen är i en polygon bestående av andra positioner, HELTAl ska användas i den här implementationen
-    /// </summary>
-    /// <remarks> Anpassad lösning from https://stackoverflow.com/a/14998816 </remarks>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="polygon">List av positioner som bildar en polygon, antar att den sista sitter ihop med den första i listan</param>
-    /// <param name="position">Position som du vill veta om den är i polygonen</param>
-    /// <returns>Sant om positinen är i polygonen</returns>
-    public static bool InsidePolygon<T>(List<Position<T>> polygon, Position<T> position) where T : IBinaryInteger<T>
-    {
-        bool result = false;
-        int j = polygon.Count - 1;
-        for (int i = 0; i < polygon.Count; i++)
-        {
-            if (polygon[i].Y < position.Y && polygon[j].Y >= position.Y ||
-                polygon[j].Y < position.Y && polygon[i].Y >= position.Y)
-            {
-                if (polygon[i].X + (position.Y - polygon[i].Y) /
-                   (polygon[j].Y - polygon[i].Y) *
-                   (polygon[j].X - polygon[i].X) < position.X)
-                {
-                    result = !result;
-                }
-            }
-            j = i;
-        }
-        return result;
-    }
+    
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="polygon"></param>
     /// <returns></returns>
-    public static int AreaOfSimpelPolygon(List<Position<int>> polygon, bool includeOutline)
+    public static int AreaOfSimpelPolygon(this List<Position<int>> polygon, bool includeOutline)
     {
         polygon.Add(polygon[0]);
         var area = Math.Abs(polygon.Take(polygon.Count - 1)
@@ -59,7 +33,7 @@ public class AoCShapes
         }
         return area;
     }
-    public static long AreaOfSimpelPolygon(List<Position<long>> polygon, bool includeOutline)
+    public static long AreaOfSimpelPolygon(this List<Position<long>> polygon, bool includeOutline)
     {
         polygon.Add(polygon[0]);
         var area = Math.Abs(polygon.Take(polygon.Count - 1)
@@ -114,6 +88,63 @@ public class AoCShapes
                 }
             }
             j = i;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Kollar om positionen är i en polygon bestående av andra positioner, HELTAL ska användas i den här implementationen
+    /// </summary>
+    /// <remarks> Anpassad lösning from https://stackoverflow.com/a/14998816 </remarks>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="polygon">List av positioner som bildar en polygon, antar att den sista sitter ihop med den första i listan</param>
+    /// <param name="position">Position som du vill veta om den är i polygonen</param>
+    /// <returns>Sant om positinen är i polygonen</returns>
+    public static bool InsidePolygon<T>(this List<Position<T>> polygon, Position<T> position) where T : IBinaryInteger<T>
+    {
+        bool result = false;
+        int j = polygon.Count - 1;
+        for (int i = 0; i < polygon.Count; i++)
+        {
+            if (polygon[i].Y < position.Y && polygon[j].Y >= position.Y ||
+                polygon[j].Y < position.Y && polygon[i].Y >= position.Y)
+            {
+                if (polygon[i].X + (position.Y - polygon[i].Y) /
+                   (polygon[j].Y - polygon[i].Y) *
+                   (polygon[j].X - polygon[i].X) < position.X)
+                {
+                    result = !result;
+                }
+            }
+            j = i;
+        }
+        return result;
+    }
+
+    public static bool InclusiveInsidePolygon<T>(this List<Position<T>> polygon, Position<T> point) where T : IBinaryInteger<T>
+    {
+        bool result = false;
+        var a = polygon.Last();
+        foreach (var b in polygon)
+        {
+            if ((b.X == point.X) && (b.Y == point.Y))
+                return true;
+
+            if ((b.Y == a.Y) && (point.Y == a.Y))
+            {
+                if ((a.X <= point.X) && (point.X <= b.X))
+                    return true;
+
+                if ((b.X <= point.X) && (point.X <= a.X))
+                    return true;
+            }
+
+            if ((b.Y < point.Y) && (a.Y >= point.Y) || (a.Y < point.Y) && (b.Y >= point.Y))
+            {
+                if (b.X + (point.Y - b.Y) / (a.Y - b.Y) * (a.X - b.X) <= point.X)
+                    result = !result;
+            }
+            a = b;
         }
         return result;
     }

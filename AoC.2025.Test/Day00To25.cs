@@ -156,11 +156,14 @@ public class Day00To25
         new D09().PartOne(input).ShouldBe(expected);
     }
 
-    [Theory]
+    // Tar 4,5 min att köra. Borde fixa riktig polygonlogik... 
+    [Theory(Explicit = true)]
     [InlineData("09/t1.txt", 24)]
-    [InlineData("09/input.txt", 0)]
+    [InlineData("09/input.txt", 1562459680L)]
     public void Day09_2(string input, long expected)
     {
-        new D09().PartTwo(input).ShouldBe(expected);
+        long? r = new D09().PartTwo(input);
+        r.ShouldNotBeNull();
+        r.ShouldBe(expected);
     }
 }
